@@ -1,0 +1,6 @@
+[submodule "data/curriculum-doelen"]
+	path = data/curriculum-doelen
+	url = https://github.com/slonl/curriculum-doelen.git
+[submodule "data/curriculum-inhouden"]
+	path = data/curriculum-inhouden
+	url = https://github.com/slonl/curriculum-inhouden.git
