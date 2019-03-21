@@ -68,10 +68,10 @@ export default (entityName, data) => {
     const manyToManyResolvers = entityFields.filter(isRelationshipField).reduce(
         (resolvers, fieldName) =>
             Object.assign({}, resolvers, {
-                [getRelatedType(fieldName)]: (entity, args) =>
-                    data[getRelatedKey(fieldName)].filter(
+                [getRelatedType(fieldName)]: (entity, args) => {
+                    var result = data[getRelatedKey(fieldName)].filter(
                         relatedRecord => {
-							var keep = false;
+                            var keep = false;
                             if (entity[fieldName] == relatedRecord.id) {
                                 keep = true;
                             }
@@ -112,35 +112,18 @@ export default (entityName, data) => {
                                         return false;
                                       }
                                     }
-/* 
-                                    if (getReverseRelatedField(fieldName) == i) {
-                                    }
-                                    if (typeof args.filter[i] === "object") {
-                                        if (args.filter[i].indexOf(relatedRecord.id) < 0) {
-                                            return false;
-                                        }
-                                    } else {
-                                        if (args.filter[i] != relatedRecord[i]) {
-                                            return false;
-                                        }
-                                    }
-                                    if (typeof relatedRecord[i] === "object") {
-					console.log(args.filter);
-                                        if (relatedRecord[i].indexOf(args.filter[i][0]) < 0) {
-                                            return false;
-                                        }
-                                    } else {
-                                        if (relatedRecord[i] != args.filter[i]) {
-                                            return false;
-                                        }
-                                    }
-*/
-
                                 }
                             }
                             return keep;
                         }
-                    ),
+                    );
+
+                    if (args.page !== undefined && args.perPage) {
+                        var count = result.length;
+                        result = result.slice(args.page * args.perPage, args.page * args.perPage + args.perPage);
+                    }
+                    return result;
+                }
             }),
         {}
     );
@@ -151,14 +134,10 @@ export default (entityName, data) => {
     const oneToManyResolvers = entities.filter(hasReverseRelationship).reduce(
         (resolvers, entityName) =>
             Object.assign({}, resolvers, {
-                [getRelationshipFromKey(entityName)]: (entity, args) =>
-                    data[entityName].filter(
+                [getRelationshipFromKey(entityName)]: (entity, args) => {
+                    var result = data[entityName].filter(
                         record => {
                             if (args.filter) {
-console.log("---- 2 -----");
-console.log(args.filter);
-console.log("---- /2 -----");
-
                                 for (var i in args.filter) {
                                     if (typeof record[i] === "object") {
                                         if (record[i].indexOf(args.filter[i][0]) < 0) {
@@ -179,12 +158,77 @@ console.log("---- /2 -----");
                             }
                             return false;
 			}
-                    ),
+                    );
+                    if (args.page !== undefined && args.perPage) {
+                        var count = result.length;
+                        result = result.slice(args.page * args.perPage, args.page * args.perPage + args.perPage);
+                    }
+                    return result;
+                }
+            }),
+        {}
+    );
+
+
+    const countResolvers = entityFields.filter(isRelationshipField).reduce(
+        (resolvers, fieldName) =>
+            Object.assign({}, resolvers, {
+                ['_' + getRelatedType(fieldName) + 'Count']: (entity, args) => {
+                    var result = data[getRelatedKey(fieldName)].filter(
+                        relatedRecord => {
+                            var keep = false;
+                            if (entity[fieldName] == relatedRecord.id) {
+                                keep = true;
+                            }
+                            if (entity[fieldName] && entity[fieldName].indexOf && (entity[fieldName].indexOf(relatedRecord.id) > -1)) {
+                                keep = true;
+                            }
+
+                            if (keep && args.filter) {
+                                for (var i in args.filter) {
+                                    if (isRelationshipField(i)) {
+                                        if (relatedRecord[i] && relatedRecord[i].indexOf(args.filter[i][0]) > -1) {
+                                           return true;
+                                        }
+
+                                        const filteredRecords = data[getRelatedKey(i)].filter(
+                                           filterRecord => {
+                                              if (filterRecord.id != args.filter[i][0]) {
+                                                 return false;
+                                              }
+                                              if (!filterRecord[fieldName]) {
+                                                 return false;
+                                              }
+                                              if (filterRecord[fieldName].indexOf(relatedRecord.id) < 0) {
+                                                 return false;
+                                              }
+                                              return true;
+                                           }
+                                        );
+
+                                        if (!filteredRecords.length) {
+                                           return false;
+                                        }
+                                        return true;
+                                    } else {
+                                      if (args.filter[i] == relatedRecord[i]) {
+                                        return true;
+                                      } else {
+                                        return false;
+                                      }
+                                    }
+                                }
+                            }
+                            return keep;
+                        }
+                    );
+                    return result.length;
+                }
             }),
         {}
     );
 
 //    return Object.assign({}, manyToOneResolvers, oneToManyResolvers);
-    return Object.assign({}, manyToManyResolvers, oneToManyResolvers);
+    return Object.assign({}, manyToManyResolvers, oneToManyResolvers, countResolvers);
 
 };

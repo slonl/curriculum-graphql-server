@@ -182,8 +182,9 @@ export default data => {
                 const filterType = filterTypesByName[rel];
 
                 ext += `
-extend type ${type} { ${relType}(filter: ${relFilterType}): [${relType}] }
-extend type ${relType} { ${rel}(filter: ${filterType}): [${type}] }`;
+extend type ${type} { ${relType}(filter: ${relFilterType}, page: Int, perPage: Int): [${relType}] }
+extend type ${relType} { ${rel}(filter: ${filterType}, page: Int, perPage: Int): [${type}] }
+extend type ${type} { _${relType}Count(filter: ${relFilterType}): Int }`;
             });
         return ext;
     }, '');
