@@ -4,3 +4,9 @@
 [submodule "data/curriculum-inhouden"]
 	path = data/curriculum-inhouden
 	url = https://github.com/slonl/curriculum-inhouden.git
+[submodule "data/curriculum-kerndoelen"]
+	path = data/curriculum-kerndoelen
+	url = https://github.com/slonl/curriculum-kerndoelen.git
+[submodule "data/curriculum-leerdoelenkaarten"]
+	path = data/curriculum-leerdoelenkaarten
+	url = https://github.com/slonl/curriculum-leerdoelenkaarten.git
