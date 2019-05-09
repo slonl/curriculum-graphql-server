@@ -15,27 +15,51 @@
 
 		// FIXME: read this from the json context instead of hard-coding it.
 		var types = [
+			// Leerdoelenkaarten
+			'ldk_vak','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
 			// Inhouden
 			'vak','vakkern','vaksubkern','vakinhoud',
 			// Doelen
-			'doelniveau','doel','niveau',
-			// Leerdoelenkaarten
-			'ldk_vak','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
+			'doelniveau','doel','niveau'//,
 			// Kerndoelen
-			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel'
+//			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel'
 		];
+
+		// ignore related links that aren't parent-child relations		
+		var ignore = {
+			'ldk_vak': ['vak_id'],
+			'ldk_vakkern': ['vakkern_id'],
+			'ldk_vaksubkern': ['vaksubkern_id'],
+			'ldk_vakinhoud': ['vakinhoud_id']
+		};
 		
+		function shouldIgnore(section, property) {
+			return (ignore[section] && ignore[section].indexOf(property)!==-1);
+		}
+		
+		
+		// create an index on entity id (for all sections)
 		types.forEach(function(section) {
 			curriculum.data[section].forEach(function(entity) {
 				idIndex[entity.id] = Object.assign({ section: section, parents: [] },entity);
 			});
 		});
 
+
+		// for all entries in the idIndex, find all parents
 		Object.keys(idIndex).forEach(function(id) {
 			var entity = idIndex[id];
+			
+			// for all sections, check if there is a reference to this entity's id
 			var parentTypes = types.slice();
-			parentTypes.pop();
+//			parentTypes.pop();//? popt niveau
 			parentTypes.forEach(function(section) {
+				// if entity.section is e.g. ldk_vak, and section is vak, this link should not be
+				// counted as a parent.
+				if (shouldIgnore(entity.section, section+'_id')) {
+					console.log('Ignoring '+entity.section+'.'+section+'_id');
+					return;
+				}
 				if (typeof entity[section+'_id'] != 'undefined') {
 					if (Array.isArray(entity[section+'_id'])) {
 						entity[section+'_id'].forEach(function(childId) {
@@ -50,15 +74,15 @@
 						}
 					}
 				}
-				if (typeof entity['doelniveau_id'] != 'undefined') {
-					entity['doelniveau_id'].forEach(function(childId) {
-						if (typeof idIndex[childId] == 'undefined') {
-							console.log('missing '+childId+' in '+section, entity);
-						}
-						idIndex[childId].parents.push(id);
-					});
-				}
 			});
+			if (typeof entity['doelniveau_id'] != 'undefined') {
+				entity['doelniveau_id'].forEach(function(childId) {
+					if (typeof idIndex[childId] == 'undefined') {
+						console.log('missing '+childId+' in '+section, entity);
+					}
+					idIndex[childId].parents.push(id);
+				});
+			}
 		});
 
 		function getNiveauIndex(niveauId) {
@@ -120,6 +144,7 @@
 
 		var count = 0;
 		var error = 0;
+		// for each doelniveau, add its parents to the niveauIndex
 		curriculum.data.doelniveau.forEach(function(doelniveau) {
 			var parents = idIndex[doelniveau.id].parents;
 			if (!parents) {
@@ -149,6 +174,7 @@
 	
 	var combined = JSON.parse(JSON.stringify((curriculum)));
 	
+	// now make sure all _id fields are arrays, ldk_* might have them as single values
 	for (i in combined.data) {
 		combined.data[i].forEach(function(entry, index) {
 			var fields = ["vak_id", "vakkern_id", "vaksubkern_id", "vakinhoud_id"];
@@ -160,6 +186,7 @@
 		});
 	}
 
+	// graphql server breaks on empty arrays in the top level, so remove them
 	for (i in combined.data) {
 		var fields = ["deprecated", "ldk_deprecated"];
 		if (fields.indexOf(i) !== 0) {
