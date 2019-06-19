@@ -3,6 +3,7 @@
 	var kerndoelenSchema   = curriculum.loadSchema('./curriculum-kerndoelen/context.json', './curriculum-kerndoelen/')
 	var leerdoelenkaartenSchema = curriculum.loadSchema('./curriculum-leerdoelenkaarten/context.json', './curriculum-leerdoelenkaarten/');
 	var inhoudenSchema = curriculum.loadSchema('./curriculum-inhouden/context.json', './curriculum-inhouden/');
+	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma/context.json', './curriculum-examenprogramma/');
 
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
@@ -22,9 +23,12 @@
 			// Leerdoelenkaarten
 			'ldk_vak','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
 			// Kerndoelen
-			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel'
+			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel',
+			// Examenprogramma
+			'examenprogramma','examenprogramma_vakleergebied','examenprogramma_domein','examenprogramma_subdomein','examenprogramma_eindterm',
+			'examenprogramma_kop1','examenprogramma_kop2','examenprogramma_kop3','examenprogramma_kop4','examenprogramma_body'
 		];
-		
+
 		types.forEach(function(section) {
 			curriculum.data[section].forEach(function(entity) {
 				idIndex[entity.id] = Object.assign({ section: section, parents: [] },entity);
@@ -161,7 +165,7 @@
 	}
 
 	for (i in combined.data) {
-		var fields = ["deprecated", "ldk_deprecated"];
+		var fields = ["deprecated", "ldk_deprecated", "examenprogramma_deprecated"];
 		if (fields.indexOf(i) !== 0) {
 			if (Array.isArray(combined.data[i]) && combined.data[i].length === 0) {
 				delete combined.data[i];
