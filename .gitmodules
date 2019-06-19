@@ -10,3 +10,6 @@
 [submodule "data/curriculum-leerdoelenkaarten"]
 	path = data/curriculum-leerdoelenkaarten
 	url = https://github.com/slonl/curriculum-leerdoelenkaarten.git
+[submodule "data/curriculum-examenprogramma"]
+	path = data/curriculum-examenprogramma
+	url = https://github.com/slonl/curriculum-examenprogramma/
