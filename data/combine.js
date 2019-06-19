@@ -21,7 +21,7 @@
 			// Inhouden
 			'vak','vakkern','vaksubkern','vakinhoud',
 			// Doelen
-			'doelniveau','doel','niveau'//,
+			'doelniveau','doel','niveau',
 			// Kerndoelen
 			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel',
 			// Examenprogramma
@@ -34,7 +34,8 @@
 			'ldk_vak': ['vak_id'],
 			'ldk_vakkern': ['vakkern_id'],
 			'ldk_vaksubkern': ['vaksubkern_id'],
-			'ldk_vakinhoud': ['vakinhoud_id']
+			'ldk_vakinhoud': ['vakinhoud_id'],
+			'kerndoel_vakleergebied': ['vak_id']
 		};
 		
 		function shouldIgnore(section, property) {
