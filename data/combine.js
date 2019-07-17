@@ -1,7 +1,7 @@
 	var curriculum	 = require('./curriculum-doelen/lib/curriculum.js');
 	var doelenSchema   = curriculum.loadSchema('./curriculum-doelen/context.json', './curriculum-doelen/');
 	var kerndoelenSchema   = curriculum.loadSchema('./curriculum-kerndoelen/context.json', './curriculum-kerndoelen/')
-	var leerdoelenkaartenSchema = curriculum.loadSchema('./curriculum-leerdoelenkaarten/context.json', './curriculum-leerdoelenkaarten/');
+//	var leerdoelenkaartenSchema = curriculum.loadSchema('./curriculum-leerdoelenkaarten/context.json', './curriculum-leerdoelenkaarten/');
 	var inhoudenSchema = curriculum.loadSchema('./curriculum-inhouden/context.json', './curriculum-inhouden/');
 	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma/context.json', './curriculum-examenprogramma/');
 
@@ -17,7 +17,7 @@
 		// FIXME: read this from the json context instead of hard-coding it.
 		var types = [
 			// Leerdoelenkaarten
-			'ldk_vak','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
+//			'ldk_vak','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
 			// Inhouden
 			'vak','vakkern','vaksubkern','vakinhoud',
 			// Doelen
@@ -31,10 +31,10 @@
 
 		// ignore related links that aren't parent-child relations		
 		var ignore = {
-			'ldk_vak': ['vak_id'],
-			'ldk_vakkern': ['vakkern_id'],
-			'ldk_vaksubkern': ['vaksubkern_id'],
-			'ldk_vakinhoud': ['vakinhoud_id'],
+//			'ldk_vak': ['vak_id'],
+//			'ldk_vakkern': ['vakkern_id'],
+//			'ldk_vaksubkern': ['vaksubkern_id'],
+//			'ldk_vakinhoud': ['vakinhoud_id'],
 			'kerndoel_vakleergebied': ['vak_id']
 		};
 		
@@ -102,10 +102,10 @@
 					vakkern_id: [],
 					vaksubkern_id: [],
 					vakinhoud_id: [],
-					ldk_vak_id: [],
-					ldk_vakkern_id: [],
-					ldk_vaksubkern_id: [],
-					ldk_vakinhoud_id: [],
+//					ldk_vak_id: [],
+//					ldk_vakkern_id: [],
+//					ldk_vaksubkern_id: [],
+//					ldk_vakinhoud_id: [],
 					doel_id: []
 				};
 				niveauIndex.push(niveauOb);
