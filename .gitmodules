@@ -13,3 +13,12 @@
 [submodule "data/curriculum-examenprogramma"]
 	path = data/curriculum-examenprogramma
 	url = https://github.com/slonl/curriculum-examenprogramma/
+[submodule "data/doelgroepteksten"]
+	path = data/doelgroepteksten
+	url = https://github.com/slonl/doelgroepteksten.git
+[submodule "data/curriculum-doelgroepteksten"]
+	path = data/curriculum-doelgroepteksten
+	url = https://github.com/slonl/curriculum-doelgroepteksten.git
+[submodule "data/curriculum-leerplaninbeeld"]
+	path = data/curriculum-leerplaninbeeld
+	url = https://github.com/slonl/curriculum-leerplaninbeeld

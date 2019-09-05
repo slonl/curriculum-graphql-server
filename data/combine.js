@@ -4,6 +4,7 @@
 //	var leerdoelenkaartenSchema = curriculum.loadSchema('./curriculum-leerdoelenkaarten/context.json', './curriculum-leerdoelenkaarten/');
 	var inhoudenSchema = curriculum.loadSchema('./curriculum-inhouden/context.json', './curriculum-inhouden/');
 	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma/context.json', './curriculum-examenprogramma/');
+//	var doelgroeptekstenSchema = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');
 
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
@@ -26,7 +27,11 @@
 			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel',
 			// Examenprogramma
 			'examenprogramma','examenprogramma_vakleergebied','examenprogramma_domein','examenprogramma_subdomein','examenprogramma_eindterm',
-			'examenprogramma_kop1','examenprogramma_kop2','examenprogramma_kop3','examenprogramma_kop4','examenprogramma_body'
+			'examenprogramma_kop1','examenprogramma_kop2','examenprogramma_kop3','examenprogramma_kop4','examenprogramma_body',
+			// Doelgroepteksten
+//			'leerlingtekst',
+			// leerplan in beeld
+			'vakkencluster','leerlijn'
 		];
 
 		// ignore related links that aren't parent-child relations		
@@ -106,7 +111,8 @@
 //					ldk_vakkern_id: [],
 //					ldk_vaksubkern_id: [],
 //					ldk_vakinhoud_id: [],
-					doel_id: []
+					doel_id: [],
+					kerndoel_id: []
 				};
 				niveauIndex.push(niveauOb);
 			}
@@ -122,20 +128,22 @@
 		}
 
 		function addParentsToNiveauIndex(parents, niveaus) {
-			niveaus.forEach(function(niveauId) {
-				var niveau = getNiveauIndex(niveauId);
-				parents.forEach(function(parentId) {
-					var parent = idIndex[parentId];
-					if (Array.isArray(niveau[parent.section+'_id'])) {
-						if (niveau[parent.section+'_id'].indexOf(parentId)==-1) {
-							niveau[parent.section+'_id'].push(parentId);
+			if (niveaus) {
+				niveaus.forEach(function(niveauId) {
+					var niveau = getNiveauIndex(niveauId);
+					parents.forEach(function(parentId) {
+						var parent = idIndex[parentId];
+						if (Array.isArray(niveau[parent.section+'_id'])) {
+							if (niveau[parent.section+'_id'].indexOf(parentId)==-1) {
+								niveau[parent.section+'_id'].push(parentId);
+							}
+							if (typeof parent.parents != 'undefined') {
+								addParentsToNiveauIndex(parent.parents, niveaus);
+							}
 						}
-						if (typeof parent.parents != 'undefined') {
-							addParentsToNiveauIndex(parent.parents, niveaus);
-						}
-					}
+					});
 				});
-			});
+			}
 			parents.forEach(function(parentId) {
 				if (!reverseNiveauIndex[parentId]) {
 					reverseNiveauIndex[parentId] = [];
@@ -160,14 +168,25 @@
 			}
 			count++;
 			addParentsToNiveauIndex(parents, doelniveau.niveau_id);
-			doelniveau.niveau_id.forEach(function(niveauId) {
-				var index = getNiveauIndex(niveauId);
-				doelniveau.doel_id.forEach(function(doelId) {
-					if (index.doel_id.indexOf(doelId)==-1) {
-						index.doel_id.push(doelId);
+			if (doelniveau.niveau_id) {
+				doelniveau.niveau_id.forEach(function(niveauId) {
+					var index = getNiveauIndex(niveauId);
+					if (doelniveau.doel_id) {
+						doelniveau.doel_id.forEach(function(doelId) {
+							if (index.doel_id.indexOf(doelId)==-1) {
+								index.doel_id.push(doelId);
+							}
+						});
+					}
+					if (doelniveau.kerndoel_id) {
+						doelniveau.kerndoel_id.forEach(function(kerndoelId) {
+							if (index.kerndoel_id.indexOf(kerndoelId)==-1) {
+								index.kerndoel_id.push(kerndoelId);
+							}
+						});
 					}
 				});
-			});
+			}
 		});
 		console.log(count+' correct, '+error+' errors');
 	}
@@ -194,7 +213,7 @@
 
 	// graphql server breaks on empty arrays in the top level, so remove them
 	for (i in combined.data) {
-		var fields = ["deprecated", "ldk_deprecated", "examenprogramma_deprecated"];
+		var fields = ["ldk_deprecated", "examenprogramma_deprecated"];
 		if (fields.indexOf(i) !== 0) {
 			if (Array.isArray(combined.data[i]) && combined.data[i].length === 0) {
 				delete combined.data[i];
