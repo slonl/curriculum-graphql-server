@@ -5,6 +5,7 @@
 	var inhoudenSchema = curriculum.loadSchema('./curriculum-inhouden/context.json', './curriculum-inhouden/');
 	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma/context.json', './curriculum-examenprogramma/');
 //	var doelgroeptekstenSchema = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');
+	var syllabusSchema = curriculum.loadSchema('./curriculum-syllabus/context.json', './curriculum-syllabus/');
 
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
@@ -31,7 +32,9 @@
 			// Doelgroepteksten
 //			'leerlingtekst',
 			// leerplan in beeld
-			'vakkencluster','leerlijn'
+			'vakkencluster','leerlijn',
+			//syllabus
+			'syllabus', 'syllabus_specifieke_eindterm', 'syllabus_toelichting', 'syllabus_vakbegrip'
 		];
 
 		// ignore related links that aren't parent-child relations		

@@ -22,3 +22,6 @@
 [submodule "data/curriculum-leerplaninbeeld"]
 	path = data/curriculum-leerplaninbeeld
 	url = https://github.com/slonl/curriculum-leerplaninbeeld
+[submodule "data/curriculum-syllabus"]
+	path = data/curriculum-syllabus
+	url = https://github.com/slonl/curriculum-syllabus.git
