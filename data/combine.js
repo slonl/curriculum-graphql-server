@@ -43,7 +43,8 @@
 //			'ldk_vakkern': ['vakkern_id'],
 //			'ldk_vaksubkern': ['vaksubkern_id'],
 //			'ldk_vakinhoud': ['vakinhoud_id'],
-			'kerndoel_vakleergebied': ['vak_id']
+			'kerndoel_vakleergebied': ['vak_id'],
+			'examenprogramma_vakleergebied': ['vak_id']
 		};
 		
 		function shouldIgnore(section, property) {
