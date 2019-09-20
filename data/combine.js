@@ -4,6 +4,7 @@
 //	var leerdoelenkaartenSchema = curriculum.loadSchema('./curriculum-leerdoelenkaarten/context.json', './curriculum-leerdoelenkaarten/');
 	var inhoudenSchema = curriculum.loadSchema('./curriculum-inhouden/context.json', './curriculum-inhouden/');
 	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma/context.json', './curriculum-examenprogramma/');
+	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma-bg/context.json', './curriculum-examenprogramma-bg/');
 //	var doelgroeptekstenSchema = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');
 	var syllabusSchema = curriculum.loadSchema('./curriculum-syllabus/context.json', './curriculum-syllabus/');
 
@@ -29,6 +30,11 @@
 			// Examenprogramma
 			'examenprogramma','examenprogramma_vakleergebied','examenprogramma_domein','examenprogramma_subdomein','examenprogramma_eindterm',
 			'examenprogramma_kop1','examenprogramma_kop2','examenprogramma_kop3','examenprogramma_kop4','examenprogramma_body',
+			// Examenprogramma beroepsgericht
+
+			'examenprogramma_bg','examenprogramma_bg_profiel','examenprogramma_bg_kern','examenprogramma_bg_kerndeel','examenprogramma_bg_module',
+			'examenprogramma_bg_moduletaak','examenprogramma_bg_keuzevak','examenprogramma_bg_keuzevaktaak','examenprogramma_bg_deeltaak','examenprogramma_bg_globale_eindterm',
+
 			// Doelgroepteksten
 //			'leerlingtekst',
 			// leerplan in beeld
@@ -55,9 +61,11 @@
 		// create an index on entity id (for all sections)
 
 		types.forEach(function(section) {
-			curriculum.data[section].forEach(function(entity) {
-				idIndex[entity.id] = Object.assign({ section: section, parents: [] },entity);
-			});
+			if (curriculum.data[section]) {
+				curriculum.data[section].forEach(function(entity) {
+					idIndex[entity.id] = Object.assign({ section: section, parents: [] },entity);
+				});
+			}
 		});
 
 

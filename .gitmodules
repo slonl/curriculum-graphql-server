@@ -25,3 +25,6 @@
 [submodule "data/curriculum-syllabus"]
 	path = data/curriculum-syllabus
 	url = https://github.com/slonl/curriculum-syllabus.git
+[submodule "data/curriculum-examenprogramma-bg"]
+	path = data/curriculum-examenprogramma-bg
+	url = https://github.com/slonl/curriculum-examenprogramma-bg
