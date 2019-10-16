@@ -43,7 +43,8 @@
 //			'ldk_vakkern': ['vakkern_id'],
 //			'ldk_vaksubkern': ['vaksubkern_id'],
 //			'ldk_vakinhoud': ['vakinhoud_id'],
-			'kerndoel_vakleergebied': ['vak_id']
+			'kerndoel_vakleergebied': ['vak_id'],
+			'examenprogramma_vakleergebied': ['vak_id']
 		};
 		
 		function shouldIgnore(section, property) {
@@ -53,9 +54,13 @@
 		
 		// create an index on entity id (for all sections)
 
-		types.forEach(function(section) {
+		Object.keys(curriculum.data).forEach(function(section) {
 			curriculum.data[section].forEach(function(entity) {
-				idIndex[entity.id] = Object.assign({ section: section, parents: [] },entity);
+				idIndex[entity.id] = Object.assign({ section: section, parents: [] }, entity);
+				if (!idIndex[entity.id].section) {
+					console.log('error',section,entity);
+					process.exit();
+				}
 			});
 		});
 
@@ -63,7 +68,10 @@
 		// for all entries in the idIndex, find all parents
 		Object.keys(idIndex).forEach(function(id) {
 			var entity = idIndex[id];
-			
+			if (entity.section=='deprecated') {
+				return;
+			}
+
 			// for all sections, check if there is a reference to this entity's id
 			var parentTypes = types.slice();
 //			parentTypes.pop();//? popt niveau
@@ -115,33 +123,47 @@
 //					ldk_vaksubkern_id: [],
 //					ldk_vakinhoud_id: [],
 					doel_id: [],
-					kerndoel_id: []
+					kerndoel_id: [],
+					examenprogramma_eindterm_id: [],
+					examenprogramma_subdomein_id: [],
+					examenprogramma_domein_id: [],
+					examenprogramma_id: [],
+					syllabus_specifieke_eindterm_id: [],
+					syllabus_toelichting_id: [],
+					syllabus_vakbegrip_id: [],
+					syllabus_id: []
 				};
 				niveauIndex.push(niveauOb);
 			}
 			return niveauOb;
 		}
 
-		function getParentType(entity) {
-			var types=['vak','vakkern','vaksubkern','vakinhoud'];
-			var index=types.indexOf(entity.section);
-			if (index>0) {
-				return types[index-1];
-			}
-		}
+		var seen = {};
 
-		function addParentsToNiveauIndex(parents, niveaus) {
+		function addParentsToNiveauIndex(parents, niveaus, indent="") {
+			if (indent==="") {
+				seen = {};
+			}
 			if (niveaus) {
 				niveaus.forEach(function(niveauId) {
+					if (typeof seen[niveauId] == 'undefined') {
+						seen[niveauId] = {};
+					}
 					var niveau = getNiveauIndex(niveauId);
 					parents.forEach(function(parentId) {
+						console.log(indent+parentId);
+						if (seen[niveauId][parentId]) {
+							console.error('loop detected, skipping '+parentId);
+							return;
+						}
+						seen[niveauId][parentId]=true;
 						var parent = idIndex[parentId];
 						if (Array.isArray(niveau[parent.section+'_id'])) {
 							if (niveau[parent.section+'_id'].indexOf(parentId)==-1) {
 								niveau[parent.section+'_id'].push(parentId);
 							}
 							if (typeof parent.parents != 'undefined') {
-								addParentsToNiveauIndex(parent.parents, niveaus);
+								addParentsToNiveauIndex(parent.parents, niveaus, indent+"  ");
 							}
 						}
 					});
@@ -161,36 +183,68 @@
 
 		var count = 0;
 		var error = 0;
-		// for each doelniveau, add its parents to the niveauIndex
-		curriculum.data.doelniveau.forEach(function(doelniveau) {
-			var parents = idIndex[doelniveau.id].parents;
+
+		function addEntityWithNiveau(entity, section) {
+			var parents = idIndex[entity.id].parents;
 			if (!parents) {
-				console.log('missing doelniveau parents for '+doelniveau.id);
+				console.log('missing entity parents for '+entity.id);
 				error++;
 				return;
 			}
 			count++;
-			addParentsToNiveauIndex(parents, doelniveau.niveau_id);
-			if (doelniveau.niveau_id) {
-				doelniveau.niveau_id.forEach(function(niveauId) {
-					var index = getNiveauIndex(niveauId);
-					if (doelniveau.doel_id) {
-						doelniveau.doel_id.forEach(function(doelId) {
-							if (index.doel_id.indexOf(doelId)==-1) {
-								index.doel_id.push(doelId);
-							}
-						});
-					}
-					if (doelniveau.kerndoel_id) {
-						doelniveau.kerndoel_id.forEach(function(kerndoelId) {
-							if (index.kerndoel_id.indexOf(kerndoelId)==-1) {
-								index.kerndoel_id.push(kerndoelId);
-							}
-						});
-					}
-				});
+			addParentsToNiveauIndex(parents, entity.niveau_id);
+			if (entity.niveau_id) {
+				if (section == 'doelniveau') {
+					entity.niveau_id.forEach(function(niveauId) {
+						var index = getNiveauIndex(niveauId);
+						if (entity.doel_id) {
+							entity.doel_id.forEach(function(doelId) {
+								if (index.doel_id.indexOf(doelId)==-1) {
+									index.doel_id.push(doelId);
+								}
+							});
+						}
+						if (entity.kerndoel_id) {
+							entity.kerndoel_id.forEach(function(kerndoelId) {
+								if (index.kerndoel_id.indexOf(kerndoelId)==-1) {
+									index.kerndoel_id.push(kerndoelId);
+								}
+							});
+						}
+					});
+				} else if (section == 'examenprogramma_eindterm') {
+					entity.niveau_id.forEach(function(niveauId) {
+						var index = getNiveauIndex(niveauId);
+						index[section+'_id'].push(entity.id);
+					});
+				} else {
+					console.log('unknown section',section);
+				}
 			}
+		}
+
+		// for each doelniveau, add its parents to the niveauIndex
+		curriculum.data.doelniveau.forEach(function(entity) {
+			addEntityWithNiveau(entity, 'doelniveau');
 		});
+		var c = 0;
+		var total = curriculum.data.examenprogramma_eindterm.length;
+		curriculum.data.examenprogramma_eindterm.forEach(function(entity) {
+			c++;
+			process.stdout.write("\r"+c+'/'+total+' '+entity.id);
+			addEntityWithNiveau(entity, 'examenprogramma_eindterm');
+		});
+		
+/*
+		var seen = {};
+		function walkParents(entity, indent) {
+			console.log(indent+entity.id+' '+entity.section);
+			entity.parents.forEach(function(parent) {
+				walkParents(idIndex[parent], indent+'  ');
+			});
+		}
+		walkParents(idIndex["60436a57-d4e3-4c40-9da0-5ed326b1c45e"]);
+*/
 		console.log(count+' correct, '+error+' errors');
 	}
 
