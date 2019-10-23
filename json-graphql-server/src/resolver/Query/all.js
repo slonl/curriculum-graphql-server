@@ -19,6 +19,14 @@ export default (entityData = []) => (
         });
     }
 
+    // remove items with negative ID
+    items = items.filter(function(entry) {
+       if (entry.id < 0) {
+          return false;
+       }
+       return true;
+    });
+
     items = applyFilters(items, filter);
 
     if (page !== undefined && perPage) {

@@ -91,6 +91,9 @@ export default (entityName, data) => {
                                               if (filterRecord.id != args.filter[i][0]) {
                                                  return false;
                                               }
+                                              if (filterRecord.id < 0) {
+                                                 return false;
+                                              }
                                               if (!filterRecord[fieldName]) {
                                                  return false;
                                               }
@@ -194,6 +197,9 @@ export default (entityName, data) => {
                                         const filteredRecords = data[getRelatedKey(i)].filter(
                                            filterRecord => {
                                               if (filterRecord.id != args.filter[i][0]) {
+                                                 return false;
+                                              }
+                                              if (filterRecord.id < 0) {
                                                  return false;
                                               }
                                               if (!filterRecord[fieldName]) {
