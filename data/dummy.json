@@ -1,0 +1,47 @@
+{
+    "vak": [
+        {
+            "id": "-1",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "vakkern_id": [],
+            "vakinhoud_id": [],
+            "doelniveau_id": []
+        }
+    ],
+    "vakkern": [
+        {
+            "id": "-2",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "vaksubkern_id": [],
+            "vakinhoud_id": [],
+            "doelniveau_id": []
+        }
+    ],
+    "vaksubkern": [
+        {
+            "id": "-3",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "vakinhoud_id": [],
+            "doelniveau_id": []
+        }
+    ],
+    "vakinhoud": [
+        {
+            "id": "-4",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": []
+        }
+    ]
+}

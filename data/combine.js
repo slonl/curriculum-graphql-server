@@ -256,7 +256,11 @@
 
 
 	var fs = require('fs');
-
+	var dummy = JSON.parse(fs.readFileSync('./dummy.json'));
+	Object.keys(dummy).forEach(function(section) {
+		curriculum.data[section].push(dummy[section][0]);
+	});
+	
 	makeIndex();
 	curriculum.data.niveauIndex = niveauIndex;
 	
