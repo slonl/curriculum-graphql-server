@@ -1,0 +1,38 @@
+{
+	"definitions": {
+		"base": {
+			"allOf": [
+				{ "$ref": "https://opendata.slo.nl/curriculum/schemas/curriculum-doelen/context.json#/definitions/base" },
+				{ "$ref": "https://opendata.slo.nl/curriculum/schemas/curriculum-doelen/context.json#/definitions/allEntities" },
+				{ "$ref": "https://opendata.slo.nl/curriculum/schemas/curriculum-inhouden/context.json#/definitions/allEntities" },
+				{ "$ref": "https://opendata.slo.nl/curriculum/schemas/curriculum-kerndoelen/context.json#/definitions/allEntities" },
+				{ "$ref": "https://opendata.slo.nl/curriculum/schemas/curriculum-examenprogramma/context.json#/definitions/allEntities" }
+			],
+			"properties": {
+				"description": {
+					"type": "string"
+				}
+			}
+		},
+		"leerlingtekst": {
+			"$ref": "#/definitions/base"
+		}
+	},
+	"$id": "https://opendata.slo.nl/curriculum/schemas/curriculum-doelgroepteksten/context.json",
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"leerlingtekst": {
+			"#file": "data/leerlingteksten.json",
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/leerlingtekst"
+			}
+		},
+		"doelgroepteksten_deprecated": {
+			"#file": "data/deprecated.json",
+			"type" : "array"
+		}
+	},
+	"required": ["leerlingtekst"]
+}

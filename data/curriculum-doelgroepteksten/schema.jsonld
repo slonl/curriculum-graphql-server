@@ -1,0 +1,19 @@
+{
+	"@context": {
+		"leerlingtekst": "http://opendata.slo.nl/curriculum/schemas/leerlingtekst.jsonld",
+		"id": {
+			"@id": "@id"
+		},
+		"title": {
+			"@id": "http://purl.org/dc/terms/title",
+			"@type": "@id"
+		},
+		"description": {
+			"@id": "http://purl.org/dc/terms/description",
+			"@type": "@id"
+		},
+		"Leerlingtekst": {
+			"@id": "leerlingtekst:#Leerlingtekst"
+		}
+	}
+}
