@@ -4,7 +4,7 @@
 //	var leerdoelenkaartenSchema = curriculum.loadSchema('./curriculum-leerdoelenkaarten/context.json', './curriculum-leerdoelenkaarten/');
 	var inhoudenSchema = curriculum.loadSchema('./curriculum-inhouden/context.json', './curriculum-inhouden/');
 	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma/context.json', './curriculum-examenprogramma/');
-	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma-bg/context.json', './curriculum-examenprogramma-bg/');
+	var examenprogrammaBgSchema = curriculum.loadSchema('./curriculum-examenprogramma-bg/context.json', './curriculum-examenprogramma-bg/');
 	var doelgroeptekstenSchema = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');
 	var syllabusSchema = curriculum.loadSchema('./curriculum-syllabus/context.json', './curriculum-syllabus/');
 
@@ -22,7 +22,8 @@
 			// Leerdoelenkaarten
 //			'ldk_vak','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
 			// Inhouden
-			'vak','vakkern','vaksubkern','vakinhoud',
+//			'vak',
+			'vakkern','vaksubkern','vakinhoud',
 			// Doelen
 			'doelniveau','doel','niveau',
 			// Kerndoelen
@@ -50,7 +51,9 @@
 //			'ldk_vaksubkern': ['vaksubkern_id'],
 //			'ldk_vakinhoud': ['vakinhoud_id'],
 			'kerndoel_vakleergebied': ['vak_id'],
-			'examenprogramma_vakleergebied': ['vak_id']
+			'examenprogramma_vakleergebied': ['vak_id'],
+			'leerlijn': ['vak_id', 'vakinhoud_id'],
+			'vakkencluster': ['vak_id']
 		};
 		
 		function shouldIgnore(section, property) {
@@ -93,8 +96,9 @@
 						entity[section+'_id'].forEach(function(childId) {
 							if (typeof idIndex[childId] == 'undefined') {
 								console.log('missing '+childId+' in '+section, entity);
+							} else {
+								idIndex[childId].parents.push(id);
 							}
-							idIndex[childId].parents.push(id);
 						});
 					} else {
 						if (typeof idIndex[entity[section+'_id']] != 'undefined') {
@@ -107,8 +111,9 @@
 				entity['doelniveau_id'].forEach(function(childId) {
 					if (typeof idIndex[childId] == 'undefined') {
 						console.log('missing '+childId+' in '+section, entity);
+					} else {
+						idIndex[childId].parents.push(id);
 					}
-					idIndex[childId].parents.push(id);
 				});
 			}
 		});
@@ -120,7 +125,7 @@
 			if (!niveauOb) {
 				niveauOb = {
 					niveau_id: niveauId,
-					vak_id: [],
+//					vak_id: [],
 					vakkern_id: [],
 					vaksubkern_id: [],
 					vakinhoud_id: [],
@@ -159,7 +164,7 @@
 					parents.forEach(function(parentId) {
 						console.log(indent+parentId);
 						if (seen[niveauId][parentId]) {
-							console.error('loop detected, skipping '+parentId);
+//							console.error('loop detected, skipping '+parentId);
 							return;
 						}
 						seen[niveauId][parentId]=true;
