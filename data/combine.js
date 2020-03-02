@@ -62,7 +62,6 @@
 		
 		
 		// create an index on entity id (for all sections)
-
 		Object.keys(curriculum.data).forEach(function(section) {
 			curriculum.data[section].forEach(function(entity) {
 				idIndex[entity.id] = Object.assign({ section: section, parents: [] }, entity);
@@ -72,7 +71,6 @@
 				}
 			});
 		});
-
 
 		// for all entries in the idIndex, find all parents
 		Object.keys(idIndex).forEach(function(id) {
@@ -115,6 +113,33 @@
 						idIndex[childId].parents.push(id);
 					}
 				});
+			}
+		});
+
+		// deprecate all entities with 'deleted' true or 1
+		Object.keys(idIndex).forEach(function(id) {
+			var ent = idIndex[id];
+			if (ent.deleted==true || ent.deleted==1) {
+				console.log('deleted '+ent.id);
+				// set types, replacedBy
+				ent.types = [ ent.section ];
+				ent.replacedBy = [];
+				// move entity to deprecated list
+				curriculum.data[ent.section] = curriculum.data[ent.section].filter(function(child) {
+					return child.id != ent.id;
+				});
+				curriculum.data.deprecated.push(ent);
+				// remove entity from all parents
+				ent.parents.forEach(function(parent) {
+					if (parent[ent.section+'_id']) {
+						parent[ent.section+'_id'] = parent[ent.section+'_id'].filter(function(childId) {
+							return childId != ent.id;
+						});
+					}
+				});
+				// remove parents list
+				ent.parents = [];
+				ent.section = 'deprecated';
 			}
 		});
 
