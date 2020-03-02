@@ -43,5 +43,81 @@
             "replaces": [],
             "doelniveau_id": []
         }
-    ]
+    ],
+	"doel": [
+		{
+			"id": "-5",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replaces": [],
+			"vakbegrippen": ""
+		}
+	],
+	"examenprogramma": [
+		{
+			"id": "-5",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replaces": [],
+			"niveau_id": []
+		}
+	],
+	"examenprogramma_domein": [
+		{
+			"id": "-6",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replaces": [],
+			"niveau_id": []
+		}
+	],
+	"examenprogramma_kop1": [
+		{
+			"id": "-7",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replaces": [],
+			"prefix": "",
+			"examenprogramma_kop2_id": [],
+			"examenprogramma_kop3_id": [],
+			"examenprogramma_kop4_id": []
+		}
+	],
+	"examenprogramma_kop2": [
+		{
+			"id": "-8",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replaces": [],
+			"prefix": "",
+			"examenprogramma_kop3_id": [],
+			"examenprogramma_kop4_id": []
+		}
+	],
+	"examenprogramma_kop3": [
+		{
+			"id": "-9",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replaces": [],
+			"prefix": "",
+			"examenprogramma_kop4_id": []
+		}
+	],
+	"examenprogramma_kop4": [
+		{
+			"id": "-10",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replaces": [],
+			"prefix": ""
+		}
+	]
 }
