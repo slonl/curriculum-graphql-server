@@ -123,5 +123,36 @@
 			"examenprogramma_body_id": [],
 			"prefix": ""
 		}
+	],
+	"leerlingtekst": [
+		{
+			"id" : "-11",
+			"title": "",
+			"description" : "",
+			"doel_id" : [],
+			"niveau_id" : [],
+			"doelniveau_id" : [],
+			"deprecated_id" : [],
+			"tag_id" : [],
+			"alias_id" : [],
+			"vak_id" : [],
+			"vakkern_id" : [],
+			"vaksubkern_id" : [],
+			"vakinhoud_id" : [],
+			"kerndoel_id" : [],
+			"kerndoel_domein_id" : [],
+			"kerndoel_uitstroomprofiel_id" : [],
+			"kerndoel_vakleergebied_id" : [],
+			"examenprogramma_id" : [],
+			"examenprogramma_body_id" : [],
+			"examenprogramma_kop4_id" : [],
+			"examenprogramma_kop3_id" : [],
+			"examenprogramma_kop2_id" : [],
+			"examenprogramma_kop1_id" : [],
+			"examenprogramma_domein_id" : [],
+			"examenprogramma_subdomein_id" : [],
+			"examenprogramma_eindterm_id" : [],
+			"examenprogramma_vakleergebied_id" : []
+		}
 	]
 }
