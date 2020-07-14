@@ -1,5 +1,5 @@
 # curriculum-graphql-server
-GraphQL server for curriculum data. This server uses the curriculum-doelen and curriculum-inhouden github repositories as submodules.
+GraphQL server for curriculum data. This server uses the curriculum-basis and curriculum-lpib github repositories as submodules.
 
 ## installation
 
@@ -12,7 +12,7 @@ for older git versions (before 2.13) use:
 ```
 git clone https://github.com/slonl/curriculum-graphql-server
 cd curriculum-graphql-server
-git submodule update --init --recursive
+git submodule update --init
 ```
 
 ### install nodejs modules
@@ -20,7 +20,7 @@ git submodule update --init --recursive
 if you haven't installed nodejs yet, then do that first.
 
 ```
-cd curriculum-graphql-server
+cd json-graphql-server
 npm install
 ```
 
@@ -29,7 +29,6 @@ npm install
 On unix / linux:
 
 ```
-cd curriculum-graphql-server
 ./run.sh
 ```
 
@@ -38,18 +37,19 @@ The GraphQL server starts at localhost on port 3000 by default.
 ## updating the dataset
 
 The GraphQL server directly uses these datasets:
-- https://github.com/slonl/curriculum-doelen
-- https://github.com/slonl/curriculum-inhouden
+- https://github.com/slonl/curriculum-basis
+- https://github.com/slonl/curriculum-lpib
+- https://github.com/slonl/curriculum-kerndoelen
+- https://github.com/slonl/curriculum-examenprogramma
+- https://github.com/slonl/curriculum-examenprogramma-bg
+- https://github.com/slonl/curriculum-syllabus
 
-They are add as a submodule in the `data/` directory. This directory also contains a file called `combined.json`. This file contains all the data from both datasets. To update the datasets to the latest development version:
+They are add as a submodule in the `data/` directory. This directory also
+contains a file called `combined.json`. This file contains all the data 
+from both datasets. Update it with the combine.js script
 
 ```
-cd data/curriculum-doelen
-git pull origin master
-cd ../curriculum-inhouden
-git pull origin master
-cd ../
-nodejs ./combine.js
+node ./combine.js
 ```
 
 And then restart the GraphQL server.
