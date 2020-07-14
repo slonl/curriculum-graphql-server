@@ -6,35 +6,35 @@
             "title": "",
             "description": "",
             "replaces": [],
-            "vakkern_id": [],
-            "vakinhoud_id": [],
+            "lpib_vakkern_id": [],
+            "lpib_vakinhoud_id": [],
             "doelniveau_id": []
         }
     ],
-    "vakkern": [
+    "lpib_vakkern": [
         {
             "id": "-2",
             "unreleased": true,
             "title": "",
             "description": "",
             "replaces": [],
-            "vaksubkern_id": [],
-            "vakinhoud_id": [],
+            "lpib_vaksubkern_id": [],
+            "lpib_vakinhoud_id": [],
             "doelniveau_id": []
         }
     ],
-    "vaksubkern": [
+    "lpib_vaksubkern": [
         {
             "id": "-3",
             "unreleased": true,
             "title": "",
             "description": "",
             "replaces": [],
-            "vakinhoud_id": [],
+            "lpib_vakinhoud_id": [],
             "doelniveau_id": []
         }
     ],
-    "vakinhoud": [
+    "lpib_vakinhoud": [
         {
             "id": "-4",
             "unreleased": true,
@@ -148,9 +148,9 @@
 			"tag_id" : [],
 			"alias_id" : [],
 			"vak_id" : [],
-			"vakkern_id" : [],
-			"vaksubkern_id" : [],
-			"vakinhoud_id" : [],
+			"lpib_vakkern_id" : [],
+			"lpib_vaksubkern_id" : [],
+			"lpib_vakinhoud_id" : [],
 			"kerndoel_id" : [],
 			"kerndoel_domein_id" : [],
 			"kerndoel_uitstroomprofiel_id" : [],
@@ -172,9 +172,9 @@
 			"id": "-14",
 			"replaced_by": [],
 			"vak_id": [],
-			"vakkern_id": [],
-			"vaksubkern_id": [],
-			"vakinhoud_id": [],
+			"lpib_vakkern_id": [],
+			"lpib_vaksubkern_id": [],
+			"lpib_vakinhoud_id": [],
 			"doelniveau_id": []
 		}
 	]

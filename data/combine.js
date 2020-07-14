@@ -23,7 +23,7 @@
 			'ldk_vak','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
 			// Inhouden
 //			'vak',
-			'vakkern','vaksubkern','vakinhoud',
+			'lpib_vakkern','lpib_vaksubkern','lpib_vakinhoud',
 			// Doelen
 			'doelniveau','doel','niveau',
 			// Kerndoelen
@@ -39,7 +39,7 @@
 			// Doelgroepteksten
 			'leerlingtekst',
 			// leerplan in beeld
-			'vakkencluster','leerlijn',
+			'lpib_vakkencluster','lpib_leerlijn',
 			//syllabus
 			'syllabus', 'syllabus_specifieke_eindterm', 'syllabus_toelichting', 'syllabus_vakbegrip'
 		];
@@ -47,13 +47,13 @@
 		// ignore related links that aren't parent-child relations		
 		var ignore = {
 			'ldk_vak': ['vak_id'],
-			'ldk_vakkern': ['vakkern_id'],
-			'ldk_vaksubkern': ['vaksubkern_id'],
-			'ldk_vakinhoud': ['vakinhoud_id'],
+			'ldk_vakkern': ['lpib_vakkern_id'],
+			'ldk_vaksubkern': ['lpib_vaksubkern_id'],
+			'ldk_vakinhoud': ['lpib_vakinhoud_id'],
 			'kerndoel_vakleergebied': ['vak_id'],
 			'examenprogramma_vakleergebied': ['vak_id'],
-			'leerlijn': ['vak_id', 'vakinhoud_id'],
-			'vakkencluster': ['vak_id']
+			'lpib_leerlijn': ['vak_id', 'lpib_vakinhoud_id'],
+			'lpib_vakkencluster': ['vak_id']
 		};
 		
 		function shouldIgnore(section, property) {
@@ -151,9 +151,9 @@
 				niveauOb = {
 					niveau_id: niveauId,
 //					vak_id: [],
-					vakkern_id: [],
-					vaksubkern_id: [],
-					vakinhoud_id: [],
+					lpib_vakkern_id: [],
+					lpib_vaksubkern_id: [],
+					lpib_vakinhoud_id: [],
 					ldk_vak_id: [],
 					ldk_vakkern_id: [],
 					ldk_vaksubkern_id: [],
@@ -299,7 +299,7 @@
 	// now make sure all _id fields are arrays, ldk_* might have them as single values
 	for (i in combined.data) {
 		combined.data[i].forEach(function(entry, index) {
-			var fields = ["vak_id", "vakkern_id", "vaksubkern_id", "vakinhoud_id"];
+			var fields = ["vak_id", "lpib_vakkern_id", "lpib_vaksubkern_id", "lpib_vakinhoud_id"];
 			fields.forEach(function(field) {
 				if (entry[field] && !Array.isArray(entry[field])) {
 					combined.data[i][index][field] = [entry[field]];
