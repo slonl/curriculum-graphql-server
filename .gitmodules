@@ -1,9 +1,9 @@
-[submodule "data/curriculum-doelen"]
-	path = data/curriculum-doelen
-	url = https://github.com/slonl/curriculum-doelen.git
-[submodule "data/curriculum-inhouden"]
-	path = data/curriculum-inhouden
-	url = https://github.com/slonl/curriculum-inhouden.git
+[submodule "data/curriculum-basis"]
+	path = data/curriculum-basis
+	url = https://github.com/slonl/curriculum-basis.git
+[submodule "data/curriculum-lpib"]
+	path = data/curriculum-lpib
+	url = https://github.com/slonl/curriculum-lpib.git
 [submodule "data/curriculum-kerndoelen"]
 	path = data/curriculum-kerndoelen
 	url = https://github.com/slonl/curriculum-kerndoelen.git

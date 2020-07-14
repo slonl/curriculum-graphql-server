@@ -1,8 +1,8 @@
-	var curriculum	 = require('./curriculum-doelen/lib/curriculum.js');
-	var doelenSchema   = curriculum.loadSchema('./curriculum-doelen/context.json', './curriculum-doelen/');
+	var curriculum	 = require('./curriculum-basis/lib/curriculum.js');
+	var doelenSchema   = curriculum.loadSchema('./curriculum-basis/context.json', './curriculum-basis/');
 	var kerndoelenSchema   = curriculum.loadSchema('./curriculum-kerndoelen/context.json', './curriculum-kerndoelen/')
 	var leerdoelenkaartenSchema = curriculum.loadSchema('./curriculum-leerdoelenkaarten/context.json', './curriculum-leerdoelenkaarten/');
-	var inhoudenSchema = curriculum.loadSchema('./curriculum-inhouden/context.json', './curriculum-inhouden/');
+	var lpibSchema = curriculum.loadSchema('./curriculum-lpib/context.json', './curriculum-lpib/');
 	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma/context.json', './curriculum-examenprogramma/');
 	var examenprogrammaBgSchema = curriculum.loadSchema('./curriculum-examenprogramma-bg/context.json', './curriculum-examenprogramma-bg/');
 	var doelgroeptekstenSchema = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');

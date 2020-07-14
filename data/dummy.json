@@ -46,12 +46,24 @@
     ],
 	"doel": [
 		{
-			"id": "-5",
+			"id": "-12",
 			"unreleased": true,
 			"title": "",
 			"description": "",
 			"replaces": [],
 			"vakbegrippen": ""
+		}
+	],
+	"doelniveau": [
+		{
+			"id": "-13",
+			"unreleased": true,
+			"replaces":[],
+			"doel_id":[],
+			"kerndoel_id":[],
+			"examenprogramma_domein_id":[],
+			"examenprogramma_subdomein_id":[],
+			"examenprogramma_eindterm_id":[]
 		}
 	],
 	"examenprogramma": [
@@ -153,6 +165,17 @@
 			"examenprogramma_subdomein_id" : [],
 			"examenprogramma_eindterm_id" : [],
 			"examenprogramma_vakleergebied_id" : []
+		}
+	],
+	"deprecated": [
+		{
+			"id": "-14",
+			"replaced_by": [],
+			"vak_id": [],
+			"vakkern_id": [],
+			"vaksubkern_id": [],
+			"vakinhoud_id": [],
+			"doelniveau_id": []
 		}
 	]
 }
