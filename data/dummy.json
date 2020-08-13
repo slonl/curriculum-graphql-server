@@ -1,14 +1,11 @@
 {
-    "vak": [
+    "vakleergebied": [
         {
             "id": "-1",
             "unreleased": true,
             "title": "",
             "description": "",
-            "replaces": [],
-            "lpib_vakkern_id": [],
-            "lpib_vakinhoud_id": [],
-            "doelniveau_id": []
+            "replaces": []
         }
     ],
     "lpib_vakkern": [
@@ -20,6 +17,7 @@
             "replaces": [],
             "lpib_vaksubkern_id": [],
             "lpib_vakinhoud_id": [],
+            "vakleergebied_id": [],
             "doelniveau_id": []
         }
     ],
@@ -147,7 +145,7 @@
 			"deprecated_id" : [],
 			"tag_id" : [],
 			"alias_id" : [],
-			"vak_id" : [],
+			"vakleergebied_id" : [],
 			"lpib_vakkern_id" : [],
 			"lpib_vaksubkern_id" : [],
 			"lpib_vakinhoud_id" : [],
@@ -171,7 +169,7 @@
 		{
 			"id": "-14",
 			"replaced_by": [],
-			"vak_id": [],
+			"vakleergebied_id": [],
 			"lpib_vakkern_id": [],
 			"lpib_vaksubkern_id": [],
 			"lpib_vakinhoud_id": [],

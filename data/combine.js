@@ -1,12 +1,13 @@
-	var curriculum	 = require('./curriculum-basis/lib/curriculum.js');
-	var doelenSchema   = curriculum.loadSchema('./curriculum-basis/context.json', './curriculum-basis/');
-	var kerndoelenSchema   = curriculum.loadSchema('./curriculum-kerndoelen/context.json', './curriculum-kerndoelen/')
+	var curriculum = require('./curriculum-basis/lib/curriculum.js');
+	
+	var basisSchema             = curriculum.loadSchema('./curriculum-basis/context.json', './curriculum-basis/');
+	var kernbasisSchema         = curriculum.loadSchema('./curriculum-kerndoelen/context.json', './curriculum-kerndoelen/')
 	var leerdoelenkaartenSchema = curriculum.loadSchema('./curriculum-leerdoelenkaarten/context.json', './curriculum-leerdoelenkaarten/');
-	var lpibSchema = curriculum.loadSchema('./curriculum-lpib/context.json', './curriculum-lpib/');
-	var examenprogrammaSchema = curriculum.loadSchema('./curriculum-examenprogramma/context.json', './curriculum-examenprogramma/');
+	var lpibSchema              = curriculum.loadSchema('./curriculum-lpib/context.json', './curriculum-lpib/');
+	var examenprogrammaSchema   = curriculum.loadSchema('./curriculum-examenprogramma/context.json', './curriculum-examenprogramma/');
 	var examenprogrammaBgSchema = curriculum.loadSchema('./curriculum-examenprogramma-bg/context.json', './curriculum-examenprogramma-bg/');
-	var doelgroeptekstenSchema = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');
-	var syllabusSchema = curriculum.loadSchema('./curriculum-syllabus/context.json', './curriculum-syllabus/');
+	var doelgroeptekstenSchema  = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');
+	var syllabusSchema          = curriculum.loadSchema('./curriculum-syllabus/context.json', './curriculum-syllabus/');
 
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
@@ -22,10 +23,9 @@
 			// Leerdoelenkaarten
 			'ldk_vak','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
 			// Inhouden
-//			'vak',
 			'lpib_vakkern','lpib_vaksubkern','lpib_vakinhoud',
 			// Doelen
-			'doelniveau','doel','niveau',
+			'doelniveau','doel','niveau','vakleergebied',
 			// Kerndoelen
 			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel',
 			// Examenprogramma
@@ -46,14 +46,14 @@
 
 		// ignore related links that aren't parent-child relations		
 		var ignore = {
-			'ldk_vak': ['vak_id'],
+			'ldk_vak': ['vakleergebied_id'],
 			'ldk_vakkern': ['lpib_vakkern_id'],
 			'ldk_vaksubkern': ['lpib_vaksubkern_id'],
 			'ldk_vakinhoud': ['lpib_vakinhoud_id'],
-			'kerndoel_vakleergebied': ['vak_id'],
-			'examenprogramma_vakleergebied': ['vak_id'],
-			'lpib_leerlijn': ['vak_id', 'lpib_vakinhoud_id'],
-			'lpib_vakkencluster': ['vak_id']
+			'kerndoel_vakleergebied': ['vakleergebied_id'],
+			'examenprogramma_vakleergebied': ['vakleergebied_id'],
+			'lpib_leerlijn': ['vakleergebied_id', 'lpib_vakinhoud_id'],
+			'lpib_vakkencluster': ['vakleergebied_id']
 		};
 		
 		function shouldIgnore(section, property) {
@@ -150,11 +150,11 @@
 			if (!niveauOb) {
 				niveauOb = {
 					niveau_id: niveauId,
-//					vak_id: [],
+//					vakleergebied_id: [],
 					lpib_vakkern_id: [],
 					lpib_vaksubkern_id: [],
 					lpib_vakinhoud_id: [],
-					ldk_vak_id: [],
+					ldk_vakleergebied_id: [],
 					ldk_vakkern_id: [],
 					ldk_vaksubkern_id: [],
 					ldk_vakinhoud_id: [],
@@ -299,7 +299,7 @@
 	// now make sure all _id fields are arrays, ldk_* might have them as single values
 	for (i in combined.data) {
 		combined.data[i].forEach(function(entry, index) {
-			var fields = ["vak_id", "lpib_vakkern_id", "lpib_vaksubkern_id", "lpib_vakinhoud_id"];
+			var fields = ["vakleergebied_id", "lpib_vakkern_id", "lpib_vaksubkern_id", "lpib_vakinhoud_id"];
 			fields.forEach(function(field) {
 				if (entry[field] && !Array.isArray(entry[field])) {
 					combined.data[i][index][field] = [entry[field]];
