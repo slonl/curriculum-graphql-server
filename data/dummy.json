@@ -5,6 +5,7 @@
             "unreleased": true,
             "title": "",
             "description": "",
+            "prefix": "",
             "replaces": []
         }
     ],
@@ -185,5 +186,15 @@
 			"kerndoelLabel": "",
 			"niveau_id": []
 		}
-	]
+	],
+    "lpib_vakleergebied": [
+        {
+            "id": "-1",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "prefix": "",
+            "replaces": []
+        }
+    ]
 }
