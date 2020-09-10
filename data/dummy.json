@@ -175,5 +175,15 @@
 			"lpib_vakinhoud_id": [],
 			"doelniveau_id": []
 		}
+	],
+	"kerndoel": [
+		{
+			"id": "-15",
+			"prefix": "",
+			"title": "",
+			"description": "",
+			"kerndoelLabel": "",
+			"niveau_id": []
+		}
 	]
 }
