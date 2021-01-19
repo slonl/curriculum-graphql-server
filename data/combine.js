@@ -8,6 +8,7 @@
 	var examenprogrammaBgSchema = curriculum.loadSchema('./curriculum-examenprogramma-bg/context.json', './curriculum-examenprogramma-bg/');
 	var doelgroeptekstenSchema  = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');
 	var syllabusSchema          = curriculum.loadSchema('./curriculum-syllabus/context.json', './curriculum-syllabus/');
+	var inhoudslijnenSchema     = curriculum.loadSchema('./curriculum-inhoudslijnen/context.json', './curriculum-inhoudslijnen/');
 
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
@@ -40,8 +41,10 @@
 			'leerlingtekst',
 			// leerplan in beeld
 			'lpib_vakkencluster','lpib_leerlijn',
-			//syllabus
-			'syllabus', 'syllabus_specifieke_eindterm', 'syllabus_toelichting', 'syllabus_vakbegrip'
+			// syllabus
+			'syllabus', 'syllabus_specifieke_eindterm', 'syllabus_toelichting', 'syllabus_vakbegrip',
+			// inhoudslijnen
+			'inh_vakleergebied', 'inh_cluster', 'inh_inhoudslijn'
 		];
 
 		// ignore related links that aren't parent-child relations		
@@ -53,7 +56,8 @@
 			'kerndoel_vakleergebied': ['vakleergebied_id'],
 			'examenprogramma_vakleergebied': ['vakleergebied_id'],
 			'lpib_leerlijn': ['vakleergebied_id', 'lpib_vakinhoud_id'],
-			'lpib_vakkencluster': ['vakleergebied_id']
+			'lpib_vakkencluster': ['vakleergebied_id'],
+			'inh_vakleergebied': ['vakleergebied_id']
 		};
 		
 		function shouldIgnore(section, property) {
@@ -167,7 +171,10 @@
 					syllabus_specifieke_eindterm_id: [],
 					syllabus_toelichting_id: [],
 					syllabus_vakbegrip_id: [],
-					syllabus_id: []
+					syllabus_id: [],
+					inh_vakleergebied_id: [],
+					inh_inhoudslijn_id: [],
+					inh_cluster_id: []
 				};
 				niveauIndex.push(niveauOb);
 			}
