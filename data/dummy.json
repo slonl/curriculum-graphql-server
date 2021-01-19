@@ -193,7 +193,99 @@
             "unreleased": true,
             "title": "",
             "description": "",
-            "replaces": []
+            "lpib_vakkern_id": [],
+            "replaces": [],
+            "doelniveau_id": []
+        }
+    ],
+    "ldk_vakbegrip": [
+        {
+                "id": "-16",
+                "title": "",
+                "description":""
+        }
+    ],
+    "ldk_vakleergebied": [
+        {
+            "id": "-17",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": [],
+            "ldk_vakkern_id": [],
+            "lpib_vakleergebied_id": []
+        }
+    ],
+    "ldk_vakkern": [
+        {
+            "id": "-18",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": [],
+            "ldk_vaksubkern_id": [],
+            "lpib_vakkern_id": []
+        }
+    ],
+    "ldk_vaksubkern": [
+        {
+            "id": "-19",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": [],
+            "ldk_vakinhoud_id": [],
+            "lpib_vaksubkern_id": []
+        }
+    ],
+    "ldk_vakinhoud": [
+        {
+            "id": "-20",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": [],
+            "lpib_vakinhoud_id": []
+        }
+    ],
+    "inh_vakleergebied": [
+        {
+            "id": "-21",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": [],
+            "inh_inhoudslijn_id": [],
+            "vakleergebied_id": []
+        }
+    ],
+    "inh_inhoudslijn": [
+        {
+            "id": "-22",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": [],
+            "inh_cluster_id": []
+        }
+    ],
+    "inh_cluster": [
+        {
+            "id": "-23",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": []
         }
     ]
 }

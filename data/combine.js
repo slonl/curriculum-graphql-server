@@ -22,9 +22,9 @@
 		// FIXME: read this from the json context instead of hard-coding it.
 		var types = [
 			// Leerdoelenkaarten
-			'ldk_vak','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
+			'ldk_vakleergebied','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
 			// Inhouden
-			'lpib_vakkern','lpib_vaksubkern','lpib_vakinhoud',
+			'lpib_vakleergebied', 'lpib_vakkern','lpib_vaksubkern','lpib_vakinhoud',
 			// Doelen
 			'doelniveau','doel','niveau','vakleergebied',
 			// Kerndoelen
@@ -57,6 +57,7 @@
 			'examenprogramma_vakleergebied': ['vakleergebied_id'],
 			'lpib_leerlijn': ['vakleergebied_id', 'lpib_vakinhoud_id'],
 			'lpib_vakkencluster': ['vakleergebied_id'],
+			'lpib_vakleergebied': ['vakleergebied_id'],
 			'inh_vakleergebied': ['vakleergebied_id']
 		};
 		
@@ -295,6 +296,7 @@
 	var fs = require('fs');
 	var dummy = JSON.parse(fs.readFileSync('./dummy.json'));
 	Object.keys(dummy).forEach(function(section) {
+		console.log('appending dummy to '+section);
 		curriculum.data[section].push(dummy[section][0]);
 	});
 	
