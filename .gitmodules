@@ -28,3 +28,6 @@
 [submodule "data/curriculum-examenprogramma-bg"]
 	path = data/curriculum-examenprogramma-bg
 	url = https://github.com/slonl/curriculum-examenprogramma-bg
+[submodule "data/curriculum-inhoudslijnen"]
+	path = data/curriculum-inhoudslijnen
+	url = https://github.com/slonl/curriculum-inhoudslijnen

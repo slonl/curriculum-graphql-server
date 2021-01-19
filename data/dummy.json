@@ -194,6 +194,7 @@
             "title": "",
             "description": "",
             "replaces": [],
+            "lpib_vakkern_id": [],
             "doelniveau_id": []
         }
     ],    
@@ -227,7 +228,7 @@
             "ldk_vaksubkern_id": [],
             "lpib_vakkern_id": []
         }
-    ],    
+    ],
     "ldk_vaksubkern": [
         {
             "id": "-19",
@@ -249,6 +250,42 @@
             "replaces": [],
             "doelniveau_id": [],
             "lpib_vakinhoud_id": []
+        }
+    ],
+    "inh_vakleergebied": [
+        {
+            "id": "-21",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": [],
+            "inh_inhoudslijn_id": [],
+            "vakleergebied_id": []
+        }
+    ],
+    "inh_inhoudslijn": [
+        {
+            "id": "-22",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": [],
+            "inh_cluster_id": []
+        }
+    ],
+    "inh_cluster": [
+        {
+            "id": "-23",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": []
         }
     ]
 
