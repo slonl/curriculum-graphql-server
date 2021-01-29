@@ -25,3 +25,6 @@
 [submodule "data/curriculum-doelgroepteksten"]
 	path = data/curriculum-doelgroepteksten
 	url = https://github.com/slonl/curriculum-doelgroepteksten.git
+[submodule "data/curriculum-inhoudslijnen"]
+	path = data/curriculum-inhoudslijnen
+	url = https://github.com/slonl/curriculum-inhoudslijnen
