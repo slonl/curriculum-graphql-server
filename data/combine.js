@@ -26,7 +26,7 @@
 			// Inhouden
 			'lpib_vakleergebied', 'lpib_vakkern','lpib_vaksubkern','lpib_vakinhoud',
 			// Doelen
-			'doelniveau','doel','niveau','vakleergebied',
+			'doelniveau','doel','niveau','vakleergebied', 'alias', 'tag',
 			// Kerndoelen
 			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel',
 			// Examenprogramma
