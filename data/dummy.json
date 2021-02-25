@@ -307,6 +307,59 @@
 	    "description": "",
 	    "parent_id": ""
     	}
+    ],
+    "syllabus_specifieke_eindterm": [
+    	{
+            "id": "-26",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "examenprogramma_eindterm_id": []            
+    	}
+    ],
+    "syllabus_vakbegrip": [
+    	{
+            "id": "-27",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "examenprogramma_eindterm_id": []            
+    	}
+    ],
+    "syllabus_toelichting": [
+    	{
+            "id": "-28",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "examenprogramma_eindterm_id": [],
+            "examenprogramma_domein_id": [],
+            "syllabus_specifieke_eindterm_id": []
+    	}
+    ],
+    "syllabus": [
+    	{
+            "id": "-29",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "examenprogramma_id": [],
+            "syllabus_toelichting_id": [],
+            "syllabus_specifieke_eindterm_id": [],
+            "syllabus_vakbegrip_id": []
+    	}
     ]
 
 }
