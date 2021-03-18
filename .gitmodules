@@ -28,3 +28,6 @@
 [submodule "data/curriculum-doelgroepteksten"]
 	path = data/curriculum-doelgroepteksten
 	url = https://github.com/slonl/curriculum-doelgroepteksten
+[submodule "data/curriculum-referentiekader"]
+	path = data/curriculum-referentiekader
+	url = https://github.com/slonl/curriculum-referentiekader
