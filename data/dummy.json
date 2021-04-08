@@ -360,6 +360,43 @@
             "syllabus_specifieke_eindterm_id": [],
             "syllabus_vakbegrip_id": []
     	}
+    ],
+    "kerndoel_vakleergebied": [
+       {
+            "id": "-30",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "kerndoel_id": [],
+            "kerndoel_domein_id": [],
+            "kerndoel_uitstroomprofiel_id": [],
+            "vakleergebied_id": []
+        }
+    ],
+    "kerndoel_domein": [
+        {
+            "id": "-31",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "kerndoel_id": []    
+        }
+    ],
+    "kerndoel_uitstroomprofiel": [
+        {
+            "id": "-32",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "kerndoel_id": []
+        }
     ]
-
 }
