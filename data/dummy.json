@@ -360,6 +360,115 @@
             "syllabus_specifieke_eindterm_id": [],
             "syllabus_vakbegrip_id": []
     	}
+    ],
+    "kerndoel_vakleergebied": [
+       {
+            "id": "-30",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "kerndoel_id": [],
+            "kerndoel_domein_id": [],
+            "kerndoel_uitstroomprofiel_id": [],
+            "vakleergebied_id": []
+        }
+    ],
+    "kerndoel_domein": [
+        {
+            "id": "-31",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "kerndoel_id": []    
+        }
+    ],
+    "kerndoel_uitstroomprofiel": [
+        {
+            "id": "-32",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "kerndoel_id": []
+        }
+    ],
+    "ref_vakleergebied": [
+        {
+            "id": "-33",
+            "prefix": "",
+            "vakleergebied_id": [],
+            "doelniveau_id": [],
+            "ref_domein_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_domein": [
+        {
+            "id": "-34",
+            "prefix": "",
+            "doelniveau_id": [],
+            "ref_subdomein_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_subdomein": [
+        {
+            "id": "-35",
+            "prefix": "",
+            "doelniveau_id": [],
+            "ref_onderwerp_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_onderwerp": [
+        {
+            "id": "-36",
+            "prefix": "",
+            "doelniveau_id": [],
+            "ref_deelonderwerp_id": [],
+            "ref_tekstkenmerk_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_deelonderwerp": [
+        {
+            "id": "-37",
+            "prefix": "",
+            "doelniveau_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],    
+    "ref_tekstkenmerk": [
+        {
+            "id": "-38",
+            "prefix": "",
+            "doelniveau_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
     ]
-
 }
