@@ -398,5 +398,77 @@
             "tag_id": [],
             "kerndoel_id": []
         }
+    ],
+    "ref_vakleergebied": [
+        {
+            "id": "-33",
+            "prefix": "",
+            "vakleergebied_id": [],
+            "doelniveau_id": [],
+            "ref_domein_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_domein": [
+        {
+            "id": "-34",
+            "prefix": "",
+            "doelniveau_id": [],
+            "ref_subdomein_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_subdomein": [
+        {
+            "id": "-35",
+            "prefix": "",
+            "doelniveau_id": [],
+            "ref_onderwerp_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_onderwerp": [
+        {
+            "id": "-36",
+            "prefix": "",
+            "doelniveau_id": [],
+            "ref_deelonderwerp_id": [],
+            "ref_tekstkenmerk_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_deelonderwerp": [
+        {
+            "id": "-37",
+            "prefix": "",
+            "doelniveau_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],    
+    "ref_tekstkenmerk": [
+        {
+            "id": "-38",
+            "prefix": "",
+            "doelniveau_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
     ]
 }

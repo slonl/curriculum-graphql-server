@@ -9,6 +9,7 @@
 	var doelgroeptekstenSchema  = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');
 	var syllabusSchema          = curriculum.loadSchema('./curriculum-syllabus/context.json', './curriculum-syllabus/');
 	var inhoudslijnenSchema     = curriculum.loadSchema('./curriculum-inhoudslijnen/context.json', './curriculum-inhoudslijnen/');
+	var referentiekaderSchema   = curriculum.loadSchema('./curriculum-referentiekader/context.json', './curriculum-referentiekader/');
 
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
@@ -44,7 +45,9 @@
 			// syllabus
 			'syllabus', 'syllabus_specifieke_eindterm', 'syllabus_toelichting', 'syllabus_vakbegrip',
 			// inhoudslijnen
-			'inh_vakleergebied', 'inh_cluster', 'inh_inhoudslijn'
+			'inh_vakleergebied', 'inh_cluster', 'inh_inhoudslijn',
+			// referentiekader
+			'ref_vakleergebied', 'ref_domein', 'ref_subdomein', 'ref_onderwerp', 'ref_deelonderwerp', 'ref_tekstkenmerk'			
 		];
 
 		// ignore related links that aren't parent-child relations		
@@ -58,7 +61,8 @@
 			'lpib_leerlijn': ['vakleergebied_id', 'lpib_vakinhoud_id'],
 			'lpib_vakkencluster': ['vakleergebied_id'],
 			'lpib_vakleergebied': ['vakleergebied_id'],
-			'inh_vakleergebied': ['vakleergebied_id']
+			'inh_vakleergebied': ['vakleergebied_id'],
+			'ref_vakleergebied': ['vakleergebied_id']
 		};
 		
 		function shouldIgnore(section, property) {
@@ -175,7 +179,13 @@
 					syllabus_id: [],
 					inh_vakleergebied_id: [],
 					inh_inhoudslijn_id: [],
-					inh_cluster_id: []
+					inh_cluster_id: [],
+					ref_vakleergebied_id: [],
+					ref_domein_id: [],
+					ref_subdomein_id: [],
+					ref_onderwerp_id: [],
+					ref_deelonderwerp_id: [],
+					ref_tekstkenmerk_id: []
 				};
 				niveauIndex.push(niveauOb);
 			}
@@ -297,6 +307,9 @@
 	var dummy = JSON.parse(fs.readFileSync('./dummy.json'));
 	Object.keys(dummy).forEach(function(section) {
 		console.log('appending dummy to '+section);
+		if (!curriculum.data[section]) {
+			curriculum.data[section] = [];
+		}
 		curriculum.data[section].push(dummy[section][0]);
 	});
 	
