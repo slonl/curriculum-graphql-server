@@ -1,5 +1,6 @@
 {
-    "vakleergebied": [
+	"_comment": "last added id-iteration: -39",
+	"vakleergebied": [
         {
             "id": "-1",
             "unreleased": true,
@@ -344,6 +345,16 @@
             "examenprogramma_eindterm_id": [],
             "examenprogramma_domein_id": [],
             "syllabus_specifieke_eindterm_id": []
+    	}
+    ],
+    "syllabus_vakleergebied": [
+    	{
+            "id": "-39",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "vakleergebied_id": [],
+            "replaces": []
     	}
     ],
     "syllabus": [
