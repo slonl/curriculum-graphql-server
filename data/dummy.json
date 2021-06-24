@@ -1,5 +1,4 @@
 {
-	"_comment": "last added id-iteration: -39",
 	"vakleergebied": [
         {
             "id": "-1",
@@ -347,16 +346,6 @@
             "syllabus_specifieke_eindterm_id": []
     	}
     ],
-    "syllabus_vakleergebied": [
-    	{
-            "id": "-39",
-            "unreleased": true,
-            "title": "",
-            "description": "",
-            "vakleergebied_id": [],
-            "replaces": []
-    	}
-    ],
     "syllabus": [
     	{
             "id": "-29",
@@ -481,5 +470,15 @@
             "replaces": [],
             "unreleased": true
         }
-    ]
+     ],
+    "syllabus_vakleergebied": [
+    	{
+            "id": "-39",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "vakleergebied_id": [],
+            "replaces": []
+    	}
+   ]
 }
