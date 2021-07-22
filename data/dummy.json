@@ -480,5 +480,15 @@
             "vakleergebied_id": [],
             "replaces": []
     	}
+     ],
+    "erk_vakleergebied": [
+    	{
+            "id": "-40",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "vakleergebied_id": [],
+            "replaces": []
+    	}
    ]
 }
