@@ -31,3 +31,6 @@
 [submodule "data/curriculum-referentiekader"]
 	path = data/curriculum-referentiekader
 	url = https://github.com/slonl/curriculum-referentiekader
+[submodule "data/curriculum-erk"]
+	path = data/curriculum-erk
+	url = git@github.com:slonl/curriculum-erk
