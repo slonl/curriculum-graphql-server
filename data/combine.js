@@ -10,8 +10,8 @@
 	var syllabusSchema          = curriculum.loadSchema('./curriculum-syllabus/context.json', './curriculum-syllabus/');
 	var inhoudslijnenSchema     = curriculum.loadSchema('./curriculum-inhoudslijnen/context.json', './curriculum-inhoudslijnen/');
 	var referentiekaderSchema   = curriculum.loadSchema('./curriculum-referentiekader/context.json', './curriculum-referentiekader/');
-	var erkSchema   			= curriculum.loadSchema('./curriculum-erk/context.json', './curriculum-erk/');
-
+	var erkSchema               = curriculum.loadSchema('./curriculum-erk/context.json', './curriculum-erk/');
+	
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
 
@@ -27,12 +27,22 @@
 			'ldk_vakleergebied','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
 			// Inhouden
 			'lpib_vakleergebied', 'lpib_vakkern','lpib_vaksubkern','lpib_vakinhoud',
+			// leerplan in beeld
+			'lpib_vakkencluster','lpib_leerlijn',
+			// syllabus
+			'syllabus_vakleergebied', 'syllabus', 'syllabus_specifieke_eindterm', 'syllabus_toelichting', 'syllabus_vakbegrip',
+			// inhoudslijnen
+			'inh_vakleergebied', 'inh_cluster', 'inh_inhoudslijn',
+			// referentiekader
+			'ref_vakleergebied', 'ref_domein', 'ref_subdomein', 'ref_onderwerp', 'ref_deelonderwerp', 'ref_tekstkenmerk',
+			// erk
+			'erk_vakleergebied',
 			// Doelen
 			'doelniveau','doel','niveau','vakleergebied', 'alias', 'tag',
 			// Kerndoelen
-			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel',
+			'kerndoel_vakleergebied','kerndoel_domein','kerndoel_uitstroomprofiel','kerndoel',
 			// Examenprogramma
-			'examenprogramma','examenprogramma_vakleergebied','examenprogramma_domein','examenprogramma_subdomein','examenprogramma_eindterm',
+			'examenprogramma_vakleergebied', 'examenprogramma','examenprogramma_domein','examenprogramma_subdomein','examenprogramma_eindterm',
 			'examenprogramma_kop1','examenprogramma_kop2','examenprogramma_kop3','examenprogramma_kop4','examenprogramma_body',
 			// Examenprogramma beroepsgericht
 
@@ -40,17 +50,7 @@
 			'examenprogramma_bg_moduletaak','examenprogramma_bg_keuzevak','examenprogramma_bg_keuzevaktaak','examenprogramma_bg_deeltaak','examenprogramma_bg_globale_eindterm',
 
 			// Doelgroepteksten
-			'leerlingtekst',
-			// leerplan in beeld
-			'lpib_vakkencluster','lpib_leerlijn',
-			// syllabus
-			'syllabus', 'syllabus_specifieke_eindterm', 'syllabus_toelichting', 'syllabus_vakbegrip',
-			// inhoudslijnen
-			'inh_vakleergebied', 'inh_cluster', 'inh_inhoudslijn',
-			// referentiekader
-			'ref_vakleergebied', 'ref_domein', 'ref_subdomein', 'ref_onderwerp', 'ref_deelonderwerp', 'ref_tekstkenmerk',
-			// referentiekader
-			'erk_vakleergebied'			
+			'leerlingtekst'
 		];
 
 		// ignore related links that aren't parent-child relations		
@@ -94,7 +94,6 @@
 
 			// for all sections, check if there is a reference to this entity's id
 			var parentTypes = types.slice();
-//			parentTypes.pop();//? popt niveau
 			parentTypes.forEach(function(section) {
 				// if entity.section is e.g. ldk_vak, and section is vak, this link should not be
 				// counted as a parent.
@@ -111,10 +110,8 @@
 								idIndex[childId].parents.push(id);
 							}
 						});
-					} else {
-						if (typeof idIndex[entity[section+'_id']] != 'undefined') {
-							idIndex[entity[section+'_id']].parents.push(id);
-						}
+					} else if (typeof idIndex[entity[section+'_id']] != 'undefined') {
+						idIndex[entity[section+'_id']].parents.push(id);
 					}
 				}
 			});
@@ -173,14 +170,19 @@
 					ldk_vakinhoud_id: [],
 					doel_id: [],
 					kerndoel_id: [],
+					kerndoel_vakleergebied_id: [],
+					kerndoel_domein_id: [],
+					kerndoel_uitstroomprofiel_id: [],
 					examenprogramma_eindterm_id: [],
 					examenprogramma_subdomein_id: [],
 					examenprogramma_domein_id: [],
 					examenprogramma_id: [],
+					examenprogramma_vakleergebied_id: [],
 					syllabus_specifieke_eindterm_id: [],
 					syllabus_toelichting_id: [],
 					syllabus_vakbegrip_id: [],
 					syllabus_id: [],
+					syllabus_vakleergebied_id: [],
 					inh_vakleergebied_id: [],
 					inh_inhoudslijn_id: [],
 					inh_cluster_id: [],
@@ -285,6 +287,12 @@
 		// for each doelniveau, add its parents to the niveauIndex
 		curriculum.data.doelniveau.forEach(function(entity) {
 			addEntityWithNiveau(entity, 'doelniveau');
+		});
+		curriculum.data.kerndoel.forEach(function(entity) {
+			addEntityWithNiveau(entity, 'kerndoel');
+		});
+		curriculum.data.syllabus_specifieke_eindterm.forEach(function(entity) {
+			addEntityWithNiveau(entity, 'syllabus_specifieke_eindterm');
 		});
 		var c = 0;
 		var total = curriculum.data.examenprogramma_eindterm.length;
