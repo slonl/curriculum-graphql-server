@@ -495,5 +495,16 @@
 			"niveau_id": [],
             "replaces": []
     	}
-   ]
+     ],
+    "examenprogramma_bg_profiel": [
+    	{
+            "id": "-40",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "vakleergebied_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ]
 }
