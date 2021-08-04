@@ -195,6 +195,7 @@
             "description": "",
             "replaces": [],
             "lpib_vakkern_id": [],
+			"niveau_id": [],
             "doelniveau_id": []
         }
     ],    
@@ -356,6 +357,7 @@
             "replaces": [],
             "tag_id": [],
             "examenprogramma_id": [],
+			"niveau_id": [],
             "syllabus_toelichting_id": [],
             "syllabus_specifieke_eindterm_id": [],
             "syllabus_vakbegrip_id": []
@@ -372,6 +374,7 @@
             "kerndoel_id": [],
             "kerndoel_domein_id": [],
             "kerndoel_uitstroomprofiel_id": [],
+			"niveau_id": [],
             "vakleergebied_id": []
         }
     ],
@@ -409,6 +412,7 @@
             "title": "",
             "description": "",
             "replaces": [],
+			"niveau_id": [],
             "unreleased": true
         }
     ],
@@ -488,7 +492,19 @@
             "title": "",
             "description": "",
             "vakleergebied_id": [],
+			"niveau_id": [],
             "replaces": []
     	}
-   ]
+     ],
+    "examenprogramma_bg_profiel": [
+    	{
+            "id": "-41",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "vakleergebied_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ]
 }
