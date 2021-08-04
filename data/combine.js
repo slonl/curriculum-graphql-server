@@ -283,9 +283,11 @@
 					// add a niveauIndex entry to the section_vakleergebied entities
 					entity.niveau_id.forEach(function(niveauId) {
 						var index = getNiveauIndex(niveauId);
-						entity[section+'_vakleergebied_id'].forEach(function(vlgEntityId) {
-							index[section+'_vakleergebied_id'].push(vlgEntityId);
-						});
+						if (Array.isArray(entity[section+'_vakleergebied_id'])) {
+							entity[section+'_vakleergebied_id'].forEach(function(vlgEntityId) {
+								index[section+'_vakleergebied_id'].push(vlgEntityId);
+							});
+						}
 					})
 				} else {
 					console.log('unknown section',section);
