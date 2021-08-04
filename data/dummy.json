@@ -360,7 +360,8 @@
 			"niveau_id": [],
             "syllabus_toelichting_id": [],
             "syllabus_specifieke_eindterm_id": [],
-            "syllabus_vakbegrip_id": []
+            "syllabus_vakbegrip_id": [],
+            "syllabus_vakleergebied_id": []
     	}
     ],
     "kerndoel_vakleergebied": [
@@ -489,6 +490,7 @@
     	{
             "id": "-40",
             "unreleased": true,
+            "prefix": "",
             "title": "",
             "description": "",
             "vakleergebied_id": [],
