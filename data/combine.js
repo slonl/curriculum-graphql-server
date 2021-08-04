@@ -66,7 +66,8 @@
 			'lpib_vakleergebied': ['vakleergebied_id'],
 			'inh_vakleergebied': ['vakleergebied_id'],
 			'ref_vakleergebied': ['vakleergebied_id'],
-			'erk_vakleergebied': ['vakleergebied_id']
+			'erk_vakleergebied': ['vakleergebied_id'],
+			'doelniveau': ['kerndoel_id','examenprogramma_eindterm_id','examenprogramma_subdomein_id','examenprogramma_domein_id','doel_id']
 		};
 		
 		function shouldIgnore(section, property) {
@@ -212,7 +213,7 @@
 					}
 					var niveau = getNiveauIndex(niveauId);
 					parents.forEach(function(parentId) {
-						console.log(indent+parentId);
+//						console.log(indent+parentId);
 						if (seen[niveauId][parentId]) {
 //							console.error('loop detected, skipping '+parentId);
 							return;
@@ -273,11 +274,19 @@
 							});
 						}
 					});
-				} else if (section == 'examenprogramma_eindterm') {
+				} else if (['examenprogramma_eindterm','kerndoel'].includes(section)) {
 					entity.niveau_id.forEach(function(niveauId) {
 						var index = getNiveauIndex(niveauId);
 						index[section+'_id'].push(entity.id);
 					});
+				} else if (['examenprogramma','syllabus'].includes(section)) {
+					// add a niveauIndex entry to the section_vakleergebied entities
+					entity.niveau_id.forEach(function(niveauId) {
+						var index = getNiveauIndex(niveauId);
+						entity[section+'_vakleergebied_id'].forEach(function(vlgEntityId) {
+							index[section+'_vakleergebied_id'].push(vlgEntityId);
+						});
+					})
 				} else {
 					console.log('unknown section',section);
 				}
@@ -294,6 +303,12 @@
 		curriculum.data.syllabus_specifieke_eindterm.forEach(function(entity) {
 			addEntityWithNiveau(entity, 'syllabus_specifieke_eindterm');
 		});
+		curriculum.data.examenprogramma.forEach(function(entity) {
+			addEntityWithNiveau(entity, 'examenprogramma');
+		});
+		curriculum.data.syllabus.forEach(function(entity) {
+			addEntityWithNiveau(entity, 'syllabus');
+		});
 		var c = 0;
 		var total = curriculum.data.examenprogramma_eindterm.length;
 		curriculum.data.examenprogramma_eindterm.forEach(function(entity) {
@@ -301,7 +316,7 @@
 			process.stdout.write("\r"+c+'/'+total+' '+entity.id);
 			addEntityWithNiveau(entity, 'examenprogramma_eindterm');
 		});
-		
+
 /*
 		var seen = {};
 		function walkParents(entity, indent) {
@@ -312,7 +327,7 @@
 		}
 		walkParents(idIndex["60436a57-d4e3-4c40-9da0-5ed326b1c45e"]);
 */
-		console.log(count+' correct, '+error+' errors');
+		console.log("\n"+count+' correct, '+error+' errors');
 	}
 
 
