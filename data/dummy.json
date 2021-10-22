@@ -505,6 +505,9 @@
             "title": "",
             "description": "",
             "vakleergebied_id": [],
+			"examenprogramma_bg_kern_id": [],
+			"examenprogramma_bg_module_id": [],
+			"examenprogramma_bg_keuzevak_id": [],
 			"niveau_id": [],
             "replaces": []
     	}
