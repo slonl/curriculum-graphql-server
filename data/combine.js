@@ -11,6 +11,7 @@
 	var inhoudslijnenSchema     = curriculum.loadSchema('./curriculum-inhoudslijnen/context.json', './curriculum-inhoudslijnen/');
 	var referentiekaderSchema   = curriculum.loadSchema('./curriculum-referentiekader/context.json', './curriculum-referentiekader/');
 	var erkSchema               = curriculum.loadSchema('./curriculum-erk/context.json', './curriculum-erk/');
+	var niveauhierarchieSchema  = curriculum.loadSchema('./curriculum-niveauhierarchie/context.json', './curriculum-niveauhierarchie/');
 	
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
@@ -35,20 +36,23 @@
 			'inh_vakleergebied', 'inh_cluster', 'inh_inhoudslijn',
 			// referentiekader
 			'ref_vakleergebied', 'ref_domein', 'ref_subdomein', 'ref_onderwerp', 'ref_deelonderwerp', 'ref_tekstkenmerk',
-			// erk
-			'erk_vakleergebied',
+			// ERK
+			'erk_vakleergebied','erk_gebied','erk_categorie','erk_taalactiviteit','erk_schaal',
+			'erk_candobeschrijving','erk_voorbeeld','erk_lesidee',
 			// Doelen
 			'doelniveau','doel','niveau','vakleergebied', 'alias', 'tag',
 			// Kerndoelen
 			'kerndoel_vakleergebied','kerndoel_domein','kerndoel_uitstroomprofiel','kerndoel',
 			// Examenprogramma
-			'examenprogramma_vakleergebied', 'examenprogramma','examenprogramma_domein','examenprogramma_subdomein','examenprogramma_eindterm',
-			'examenprogramma_kop1','examenprogramma_kop2','examenprogramma_kop3','examenprogramma_kop4','examenprogramma_body',
+			'examenprogramma_vakleergebied', 'examenprogramma','examenprogramma_domein',
+			'examenprogramma_subdomein','examenprogramma_eindterm','examenprogramma_kop1',
+			'examenprogramma_kop2','examenprogramma_kop3','examenprogramma_kop4','examenprogramma_body',
 			// Examenprogramma beroepsgericht
-
-			'examenprogramma_bg','examenprogramma_bg_profiel','examenprogramma_bg_kern','examenprogramma_bg_kerndeel','examenprogramma_bg_module',
-			'examenprogramma_bg_moduletaak','examenprogramma_bg_keuzevak','examenprogramma_bg_keuzevaktaak','examenprogramma_bg_deeltaak','examenprogramma_bg_globale_eindterm',
-
+			'examenprogramma_bg','examenprogramma_bg_profiel','examenprogramma_bg_kern','examenprogramma_bg_kerndeel',
+			'examenprogramma_bg_module','examenprogramma_bg_moduletaak','examenprogramma_bg_keuzevak',
+			'examenprogramma_bg_keuzevaktaak','examenprogramma_bg_deeltaak','examenprogramma_bg_globale_eindterm',
+			// ERK
+			'nh_categorie','nh_sector','nh_schoolsoort','nh_leerweg','nh_bouw','nh_niveau',
 			// Doelgroepteksten
 			'leerlingtekst'
 		];
@@ -193,7 +197,20 @@
 					ref_onderwerp_id: [],
 					ref_deelonderwerp_id: [],
 					ref_tekstkenmerk_id: [],
-					erk_vakleergebied_id: []
+					erk_vakleergebied_id: [],
+					erk_gebied_id: [],
+					erk_categorie_id: [],
+					erk_taalactiviteit_id: [],
+					erk_schaal_id: [],
+					erk_candobeschrijving_id: [],
+					erk_voorbeeld_id: [],
+					erk_lesidee_id: [],
+					nh_categorie_id: [],
+					nh_sector_id: [],
+					nh_schoolsoort_id: [],
+					nh_leerweg_id: [],
+					nh_bouw_id: [],
+					nh_niveau_id: []
 				};
 				niveauIndex.push(niveauOb);
 			}

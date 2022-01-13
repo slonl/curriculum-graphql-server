@@ -34,3 +34,6 @@
 [submodule "data/curriculum-erk"]
 	path = data/curriculum-erk
 	url = git@github.com:slonl/curriculum-erk
+[submodule "data/curriculum-niveauhierarchie"]
+	path = data/curriculum-niveauhierarchie
+	url = git@github.com:slonl/curriculum-niveauhierarchie
