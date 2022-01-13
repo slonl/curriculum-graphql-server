@@ -51,7 +51,7 @@
 			'examenprogramma_bg','examenprogramma_bg_profiel','examenprogramma_bg_kern','examenprogramma_bg_kerndeel',
 			'examenprogramma_bg_module','examenprogramma_bg_moduletaak','examenprogramma_bg_keuzevak',
 			'examenprogramma_bg_keuzevaktaak','examenprogramma_bg_deeltaak','examenprogramma_bg_globale_eindterm',
-			// ERK
+			// Niveau hierarchie
 			'nh_categorie','nh_sector','nh_schoolsoort','nh_leerweg','nh_bouw','nh_niveau',
 			// Doelgroepteksten
 			'leerlingtekst'
