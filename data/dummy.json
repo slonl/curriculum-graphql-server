@@ -523,7 +523,6 @@
             "erk_categorie_id": [],
             "erk_taalactiviteit_id": [],
             "erk_schaal_id": [],
-			"niveau_id": [],
             "replaces": []
     	}
      ],
@@ -536,7 +535,6 @@
             "description": "",
             "erk_taalactiviteit_id": [],
             "erk_schaal_id": [],
-			"niveau_id": [],
             "replaces": []
     	}
      ],
@@ -548,7 +546,6 @@
             "title": "",
             "description": "",
             "erk_schaal_id": [],
-			"niveau_id": [],
             "replaces": []
     	}
      ],
@@ -560,9 +557,6 @@
             "title": "",
             "description": "",
             "erk_candobeschrijving_id": [],
-            "erk_voorbeeld_id": [],
-            "erk_lesidee_id": [],
-			"niveau_id": [],
             "replaces": []
     	}
      ],
@@ -574,6 +568,8 @@
             "title": "",
             "description": "",
 			"niveau_id": [],
+            "erk_voorbeeld_id": [],
+            "erk_lesidee_id": [],
             "replaces": []
     	}
      ],
@@ -584,7 +580,6 @@
             "prefix": "",
             "title": "",
             "description": "",
-			"niveau_id": [],
             "replaces": []
     	}
      ],
@@ -595,7 +590,6 @@
             "prefix": "",
             "title": "",
             "description": "",
-			"niveau_id": [],
             "replaces": []
     	}
      ],
