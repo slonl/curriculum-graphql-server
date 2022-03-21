@@ -556,6 +556,7 @@
             "prefix": "",
             "title": "",
             "description": "",
+            "algemeen": "",
             "erk_candobeschrijving_id": [],
             "replaces": []
     	}
@@ -567,6 +568,7 @@
             "prefix": "",
             "title": "",
             "description": "",
+            "isempty": "",
 			"niveau_id": [],
             "erk_voorbeeld_id": [],
             "erk_lesidee_id": [],
