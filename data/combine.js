@@ -12,13 +12,14 @@
 	var referentiekaderSchema   = curriculum.loadSchema('./curriculum-referentiekader/context.json', './curriculum-referentiekader/');
 	var erkSchema               = curriculum.loadSchema('./curriculum-erk/context.json', './curriculum-erk/');
 	var niveauhierarchieSchema  = curriculum.loadSchema('./curriculum-niveauhierarchie/context.json', './curriculum-niveauhierarchie/');
-	
+
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
 
 	//add niveauIndex
 	var niveauIndex = [];
 	var idIndex = {};
+	var typeIndex = {};
 	var reverseNiveauIndex = {};
 	function makeIndex() {
 
@@ -83,6 +84,11 @@
 		Object.keys(curriculum.data).forEach(function(section) {
 			curriculum.data[section].forEach(function(entity) {
 				idIndex[entity.id] = Object.assign({ section: section, parents: [] }, entity);
+				if (entity.types) {
+					typeIndex[entity.id] = entity.types[0]
+				} else {
+					typeIndex[entity.id] = section
+				}
 				if (!idIndex[entity.id].section) {
 					console.log('error',section,entity);
 					process.exit();
@@ -364,7 +370,7 @@
 	curriculum.data.niveauIndex = niveauIndex;
 	
 	var combined = JSON.parse(JSON.stringify((curriculum)));
-	
+
 	// now make sure all _id fields are arrays, ldk_* might have them as single values
 	for (i in combined.data) {
 		combined.data[i].forEach(function(entry, index) {
@@ -384,6 +390,45 @@
 				delete combined.data[i];
 			}
 		}
+	}
+
+	// graphlql server bug: searching by id on Deprecated fails and returns 
+	// the first entity that has no title 
+	// so fix that by adding an empty title to those entities
+	// reverted: searching on allDeprecated(filter:{id:$id}) does work
+	for (entity of combined.data.deprecated) {
+//		if (entity.title===null || typeof entity.title==="undefined") {
+//			entity.title = ""
+//		}
+		entity.deprecated = true
+		// re-insert entity in original types lists
+		// so queries can find them
+		if (Array.isArray(entity.types)) {
+			for (type of entity.types) {
+				if (!combined.data[type]) {
+					combined.data[type] = []
+				}
+				combined.data[type].push(entity)
+			}
+		} else {
+			console.error('entity '+entity.id+' has no types', entity)
+		}
+	}
+
+	delete combined.data.deprecated
+
+	// now add type index
+	combined.data.type = []
+	for (id in idIndex) {
+		let type = typeIndex[id]
+		if (!type) {
+			continue
+		}
+		combined.data.type.push({
+			id: id,
+			type: type,
+			deprecated: entity.deprecated ? true : false
+		})
 	}
 
 	var fileData = JSON.stringify(combined.data, null, "\t");
