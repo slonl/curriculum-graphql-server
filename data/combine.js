@@ -82,16 +82,14 @@
 		
 		// create an index on entity id (for all sections)
 		Object.keys(curriculum.data).forEach(function(section) {
-			curriculum.data[section].forEach(function(entity) {
-				idIndex[entity.id] = Object.assign({ section: section, parents: [] }, entity);
-				if (entity.types) {
-					typeIndex[entity.id] = entity.types[0]
-				} else {
-					typeIndex[entity.id] = section
-				}
-				if (!idIndex[entity.id].section) {
-					console.log('error',section,entity);
-					process.exit();
+			curriculum.data[section].forEach(function(entity,index) {
+				if (entity.id) { // alias has no id
+					idIndex[entity.id] = Object.assign(entity, { section: section, parents: [] });
+					if (entity.types) {
+						typeIndex[entity.id] = entity.types[0]
+					} else {
+						typeIndex[entity.id] = section
+					}
 				}
 			});
 		});
@@ -163,10 +161,12 @@
 				// remove parents list
 				ent.parents = [];
 				ent.section = 'deprecated';
+				ent.deprecated = true
 			}
 			if (ent.replaced_by) {
 				ent.replacedBy = ent.replaced_by
 				delete ent.replaced_by
+				ent.deprecated = true
 			}
 		});
 
@@ -177,7 +177,6 @@
 			if (!niveauOb) {
 				niveauOb = {
 					niveau_id: niveauId,
-//					vakleergebied_id: [],
 					lpib_vakkern_id: [],
 					lpib_vaksubkern_id: [],
 					lpib_vakinhoud_id: [],
@@ -242,9 +241,7 @@
 					}
 					var niveau = getNiveauIndex(niveauId);
 					parents.forEach(function(parentId) {
-//						console.log(indent+parentId);
 						if (seen[niveauId][parentId]) {
-//							console.error('loop detected, skipping '+parentId);
 							return;
 						}
 						seen[niveauId][parentId]=true;
@@ -348,16 +345,6 @@
 			addEntityWithNiveau(entity, 'examenprogramma_eindterm');
 		});
 
-/*
-		var seen = {};
-		function walkParents(entity, indent) {
-			console.log(indent+entity.id+' '+entity.section);
-			entity.parents.forEach(function(parent) {
-				walkParents(idIndex[parent], indent+'  ');
-			});
-		}
-		walkParents(idIndex["60436a57-d4e3-4c40-9da0-5ed326b1c45e"]);
-*/
 		console.log("\n"+count+' correct, '+error+' errors');
 	}
 
@@ -372,6 +359,7 @@
 		dummy.replacedBy = dummy.replaced_by
 		delete dummy.replaced_by
 		curriculum.data[section].push(dummy[section][0]);
+		dummy.deprecated = true
 	});
 	
 	makeIndex();
@@ -412,6 +400,7 @@
 			entity.replacedBy = entity.replaced_by
 			delete entity.replaced_by
 		}
+		entity.deprecated = true
 		// re-insert entity in original types lists
 		// so queries can find them
 		if (Array.isArray(entity.types)) {
