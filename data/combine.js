@@ -100,8 +100,10 @@
 		Object.keys(idIndex).forEach(function(id) {
 			var entity = idIndex[id];
 			if (entity.section=='deprecated') {
+				entity.deprecated = true
 				return;
 			}
+			entity.deprecated = false
 
 			// for all sections, check if there is a reference to this entity's id
 			var parentTypes = types.slice();
@@ -161,6 +163,10 @@
 				// remove parents list
 				ent.parents = [];
 				ent.section = 'deprecated';
+			}
+			if (ent.replaced_by) {
+				ent.replacedBy = ent.replaced_by
+				delete ent.replaced_by
 			}
 		});
 
@@ -363,6 +369,8 @@
 		if (!curriculum.data[section]) {
 			curriculum.data[section] = [];
 		}
+		dummy.replacedBy = dummy.replaced_by
+		delete dummy.replaced_by
 		curriculum.data[section].push(dummy[section][0]);
 	});
 	
@@ -400,7 +408,10 @@
 //		if (entity.title===null || typeof entity.title==="undefined") {
 //			entity.title = ""
 //		}
-		entity.deprecated = true
+		if (entity.replaced_by) {
+			entity.replacedBy = entity.replaced_by
+			delete entity.replaced_by
+		}
 		// re-insert entity in original types lists
 		// so queries can find them
 		if (Array.isArray(entity.types)) {
@@ -416,6 +427,7 @@
 	}
 
 	delete combined.data.deprecated
+//	combined.data.deprecated = []
 
 	// now add type index
 	combined.data.type = []
@@ -426,8 +438,7 @@
 		}
 		combined.data.type.push({
 			id: id,
-			type: type,
-			deprecated: entity.deprecated ? true : false
+			type: type
 		})
 	}
 
