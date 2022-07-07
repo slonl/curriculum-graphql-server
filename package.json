@@ -4,6 +4,9 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "node json-graphql-server/bin/json-graphql-server.js data/combined.json",
-		"combine": "cd data && node combine.js"
+		"combine": "cd data && node combine.mjs"
+	},
+	"dependencies": {
+		"curriculum-js": "^0.3.4"
 	}
 }
