@@ -184,20 +184,16 @@ function makeNiveauIndex() {
 		}
 		var index = getNiveauIndex(niveau_id);
 		let type = curriculum.index.type[entity.id]
-		console.log('adding type '+type+' '+entity.id)
 		if (index[type+'_id'].indexOf(entity.id)===-1) {
-			console.log('adding type '+type+' '+entity.id)
 			index[type+'_id'].push(entity.id)
-			var children = getChildren(entity);
-			if (!children) {
-				return
-			}
-			children.forEach(child => {
-				addChildrenWithNiveau(child,section,niveau_id)
-			})
-		} else {
-			console.log('skipped type '+type+' '+entity.id)
 		}
+		var children = getChildren(entity);
+		if (!children) {
+			return
+		}
+		children.forEach(child => {
+			addChildrenWithNiveau(child,section,niveau_id)
+		})
 	}
 
 	function addEntityWithNiveau(entity, section) {
@@ -264,12 +260,24 @@ function makeNiveauIndex() {
 		addEntityWithNiveau(entity, 'examenprogramma');
 	});
 	curriculum.data.syllabus.forEach(function(entity) {
-		let niveau_id = entity.niveau_id
-		if (!Array.isArray(niveau_id)) {
-			niveau_id = [ niveau_id ];
+		let ex = entity.examenprogramma_id
+		if (!Array.isArray(ex)) {
+			ex = [ ex ]
 		}
-		niveau_id.forEach(n => addChildrenWithNiveau(entity, 'syllabus', n));
+		ex.forEach(ex_id => {
+			let e = curriculum.index.id[ex_id]
+			let niveau_id = e.niveau_id
+			if (!niveau_id) {
+				console.log(e, niveau_id)
+				process.exit();
+			}
+			if (!Array.isArray(niveau_id)) {
+				niveau_id = [ niveau_id ];
+			}
+			niveau_id.forEach(n => addChildrenWithNiveau(entity, 'syllabus', n));
+		})
 	});
+
 	var c = 0;
 	var total = curriculum.data.examenprogramma_eindterm.length;
 	curriculum.data.examenprogramma_eindterm.forEach(function(entity) {
