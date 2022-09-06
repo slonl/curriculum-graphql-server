@@ -27,7 +27,7 @@ function makeNiveauIndex() {
 
 	// ignore related links that aren't parent-child relations		
 	var ignore = {
-		'ldk_vak': ['vakleergebied_id'],
+		'ldk_vakleergebied': ['vakleergebied_id'],
 		'ldk_vakkern': ['lpib_vakkern_id'],
 		'ldk_vaksubkern': ['lpib_vaksubkern_id'],
 		'ldk_vakinhoud': ['lpib_vakinhoud_id'],
@@ -140,12 +140,14 @@ function makeNiveauIndex() {
 					seen[niveauId][parentId]=true;
 					var parent = curriculum.index.id[parentId];
 					let section = curriculum.index.type[parentId]
+
 					if (Array.isArray(niveau[section+'_id'])) {
 						if (niveau[section+'_id'].indexOf(parentId)==-1) {
 							niveau[section+'_id'].push(parentId);
 						}
-						if (typeof parent.parents != 'undefined') {
-							addParentsToNiveauIndex(curriculum.index.references[parentId], niveaus, indent+"  ");
+						let myParents = curriculum.index.references[parentId]
+						if (typeof myParents != 'undefined') {
+							addParentsToNiveauIndex(myParents, niveaus, indent+"  ");
 						}
 					}
 				});
@@ -162,58 +164,92 @@ function makeNiveauIndex() {
 
 	function isRootType(type) {
 		return ['vakleergebied','ldk_vakleergebied','examenprogramma','syllabus',
-			'lpib_vakleergebied','lpib_vakkencluster','lpib_leerlijn'
+			'lpib_vakleergebied','lpib_vakkencluster','lpib_leerlijn', 'inh_vakleergebied'
 		].indexOf(type)>=0
+	}
+
+	function addChildrenWithNiveau(entity,section,niveau_id=null) {
+		function getChildren(e) {
+			var childIds = []
+			Object.keys(e).forEach(p => {
+				if (p.substring(p.length-3)==='_id' && p.substring(0, section.length)===section ) {
+					childIds = childIds.concat(e[p])
+				}
+			})
+			let children = [... new Set(childIds)].map(id => curriculum.index.id[id])
+			return children
+		}
+		if (!niveau_id) {
+			console.log('missing niveau_id in '+entity.id+' ('+section+')')
+		}
+		var index = getNiveauIndex(niveau_id);
+		let type = curriculum.index.type[entity.id]
+		console.log('adding type '+type+' '+entity.id)
+		if (index[type+'_id'].indexOf(entity.id)===-1) {
+			console.log('adding type '+type+' '+entity.id)
+			index[type+'_id'].push(entity.id)
+			var children = getChildren(entity);
+			if (!children) {
+				return
+			}
+			children.forEach(child => {
+				addChildrenWithNiveau(child,section,niveau_id)
+			})
+		} else {
+			console.log('skipped type '+type+' '+entity.id)
+		}
 	}
 
 	function addEntityWithNiveau(entity, section) {
 		var parents = curriculum.index.references[entity.id]
-		if (!parents && !isRootType(curriculum.index.type[entity.id])) {
-			console.log('missing entity parents for '+entity.id+' '+curriculum.index.type[entity.id])
-			error++
+		if (!parents) {
+			if (!isRootType(curriculum.index.type[entity.id])) {
+				console.log('missing entity parents for '+entity.id+' '+curriculum.index.type[entity.id])
+				error++
+			}
 			return
 		}
 		count++;
-		if (parents) {
+		if (entity.niveau_id) {
 			addParentsToNiveauIndex(parents, entity.niveau_id);
-			if (entity.niveau_id) {
-				if (section == 'doelniveau') {
-					entity.niveau_id.forEach(function(niveauId) {
-						var index = getNiveauIndex(niveauId);
-						if (entity.doel_id) {
-							entity.doel_id.forEach(function(doelId) {
-								if (index.doel_id.indexOf(doelId)==-1) {
-									index.doel_id.push(doelId);
-								}
-							});
-						}
-						if (entity.kerndoel_id) {
-							entity.kerndoel_id.forEach(function(kerndoelId) {
-								if (index.kerndoel_id.indexOf(kerndoelId)==-1) {
-									index.kerndoel_id.push(kerndoelId);
-								}
-							});
-						}
-					});
-				} else if (['examenprogramma_eindterm','kerndoel'].includes(section)) {
-					entity.niveau_id.forEach(function(niveauId) {
-						var index = getNiveauIndex(niveauId);
-						index[section+'_id'].push(entity.id);
-					});
-				} else if (['examenprogramma','syllabus'].includes(section)) {
-					// add a niveauIndex entry to the section_vakleergebied entities
-					entity.niveau_id.forEach(function(niveauId) {
-						var index = getNiveauIndex(niveauId);
-						if (Array.isArray(entity[section+'_vakleergebied_id'])) {
-							entity[section+'_vakleergebied_id'].forEach(function(vlgEntityId) {
-								index[section+'_vakleergebied_id'].push(vlgEntityId);
-							});
-						}
-					})
-				} else {
-					console.log('unknown section for niveauIndex',section);
-				}
+			if (section == 'doelniveau') {
+				entity.niveau_id.forEach(function(niveauId) {
+					var index = getNiveauIndex(niveauId);
+					if (entity.doel_id) {
+						entity.doel_id.forEach(function(doelId) {
+							if (index.doel_id.indexOf(doelId)==-1) {
+								index.doel_id.push(doelId);
+							}
+						});
+					}
+					if (entity.kerndoel_id) {
+						entity.kerndoel_id.forEach(function(kerndoelId) {
+							if (index.kerndoel_id.indexOf(kerndoelId)==-1) {
+								index.kerndoel_id.push(kerndoelId);
+							}
+						});
+					}
+				});
+			} else if (['examenprogramma_eindterm','kerndoel'].includes(section)) {
+				entity.niveau_id.forEach(function(niveauId) {
+					var index = getNiveauIndex(niveauId);
+					index[section+'_id'].push(entity.id);
+				});
+			} else if (['examenprogramma','syllabus'].includes(section)) {
+				// add a niveauIndex entry to the section_vakleergebied entities
+				entity.niveau_id.forEach(function(niveauId) {
+					var index = getNiveauIndex(niveauId);
+					if (Array.isArray(entity[section+'_vakleergebied_id'])) {
+						entity[section+'_vakleergebied_id'].forEach(function(vlgEntityId) {
+							index[section+'_vakleergebied_id'].push(vlgEntityId);
+						});
+					}
+				})
+			} else {
+				console.log('unknown section for niveauIndex',section);
 			}
+		} else {
+			console.log('no niveau_id for entity '+entity.id, section);
 		}
 	}
 
@@ -224,14 +260,15 @@ function makeNiveauIndex() {
 	curriculum.data.kerndoel.forEach(function(entity) {
 		addEntityWithNiveau(entity, 'kerndoel');
 	});
-	curriculum.data.syllabus_specifieke_eindterm.forEach(function(entity) {
-		addEntityWithNiveau(entity, 'syllabus_specifieke_eindterm');
-	});
 	curriculum.data.examenprogramma.forEach(function(entity) {
 		addEntityWithNiveau(entity, 'examenprogramma');
 	});
 	curriculum.data.syllabus.forEach(function(entity) {
-		addEntityWithNiveau(entity, 'syllabus');
+		let niveau_id = entity.niveau_id
+		if (!Array.isArray(niveau_id)) {
+			niveau_id = [ niveau_id ];
+		}
+		niveau_id.forEach(n => addChildrenWithNiveau(entity, 'syllabus', n));
 	});
 	var c = 0;
 	var total = curriculum.data.examenprogramma_eindterm.length;
