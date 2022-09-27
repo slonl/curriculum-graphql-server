@@ -942,17 +942,5 @@
             "doelniveau_id": [],
             "deprecated": true
         }
-    ],
-    "niveau": [
-        {
-            "id": "-76",
-            "unreleased": true,
-            "title": "",
-            "description": "",
-            "replaces": [],
-            "replacedBy": [],
-            "deprecated": true,
-            "vakleergebied_id": []
-        }
     ]
 }
