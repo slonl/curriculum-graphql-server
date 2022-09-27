@@ -7,6 +7,6 @@
 		"combine": "cd data && node combine.mjs"
 	},
 	"dependencies": {
-		"curriculum-js": "^0.3.4"
+		"curriculum-js": "^0.3.7"
 	}
 }
