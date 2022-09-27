@@ -19,7 +19,7 @@ let allSchemas = [
 ]
 
 //FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
-curriculum.data.parent = [{id:null}];
+curriculum.data.parent = [{id:"-10000"}];
 
 function makeNiveauIndex() {
 
@@ -27,6 +27,7 @@ function makeNiveauIndex() {
 
 	// ignore related links that aren't parent-child relations		
 	var ignore = {
+		'alias': ['parent_id'],
 		'ldk_vakleergebied': ['vakleergebied_id'],
 		'ldk_vakkern': ['lpib_vakkern_id'],
 		'ldk_vaksubkern': ['lpib_vaksubkern_id'],
@@ -54,7 +55,7 @@ function makeNiveauIndex() {
 			curriculum.deprecate(entity)
 			entity.deprecated = true
 		} else {
-			entity.deprecated = false
+			delete entity.deprecated
 		}
 		if (entity.replaced_by) {
 			entity.replacedBy = entity.replaced_by
@@ -269,12 +270,12 @@ function makeNiveauIndex() {
 			let niveau_id = e.niveau_id
 			if (!niveau_id) {
 				console.log(e, niveau_id)
-				process.exit();
+			} else {
+				if (!Array.isArray(niveau_id)) {
+					niveau_id = [ niveau_id ];
+				}
+				niveau_id.forEach(n => addChildrenWithNiveau(entity, 'syllabus', n));
 			}
-			if (!Array.isArray(niveau_id)) {
-				niveau_id = [ niveau_id ];
-			}
-			niveau_id.forEach(n => addChildrenWithNiveau(entity, 'syllabus', n));
 		})
 	});
 
@@ -285,7 +286,6 @@ function makeNiveauIndex() {
 		process.stdout.write("\r"+c+'/'+total+' '+entity.id);
 		addEntityWithNiveau(entity, 'examenprogramma_eindterm');
 	});
-
 	console.log("\n"+count+' correct, '+error+' errors');
 	return niveauIndex
 }

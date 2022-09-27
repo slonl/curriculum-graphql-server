@@ -124,6 +124,30 @@
             "deprecated": true
 		}
 	],
+	"examenprogramma_subdomein": [
+		{
+			"id": "-6b",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replacedBy": [],
+			"replaces": [],
+			"niveau_id": [],
+            "deprecated": true
+		}
+	],
+	"examenprogramma_eindterm": [
+		{
+			"id": "-6c",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replacedBy": [],
+			"replaces": [],
+			"niveau_id": [],
+            "deprecated": true
+		}
+	],
 	"examenprogramma_kop1": [
 		{
 			"id": "-7",
@@ -172,6 +196,32 @@
 	"examenprogramma_kop4": [
 		{
 			"id": "-10",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replacedBy": [],
+			"replaces": [],
+			"examenprogramma_body_id": [],
+			"prefix": "",
+            "deprecated": true
+		}
+	],
+	"examenprogramma_body": [
+		{
+			"id": "-10b",
+			"unreleased": true,
+			"title": "",
+			"description": "",
+			"replacedBy": [],
+			"replaces": [],
+			"examenprogramma_body_id": [],
+			"prefix": "",
+            "deprecated": true
+		}
+	],
+	"examenprogramma_vakleergebied": [
+		{
+			"id": "-10c",
 			"unreleased": true,
 			"title": "",
 			"description": "",
