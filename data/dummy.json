@@ -46,31 +46,7 @@
             "title": "",
             "description": "",
             "replacedBy": [],
-			"replaces": [],
-            "doelniveau_id": [],
-            "deprecated": true
-        }
-    ],
-    "lpib_vakkencluster": [
-        {
-            "id": "-4",
-            "unreleased": true,
-            "title": "",
-            "description": "",
-            "replacedBy": [],
-			"replaces": [],
-            "doelniveau_id": [],
-            "deprecated": true
-        }
-    ],
-    "lpib_leerlijn": [
-        {
-            "id": "-4",
-            "unreleased": true,
-            "title": "",
-            "description": "",
-            "replacedBy": [],
-			"replaces": [],
+            "replaces": [],
             "doelniveau_id": [],
             "deprecated": true
         }
@@ -282,10 +258,9 @@
             "title": "",
             "description": "",
             "replacedBy": [],
-            "replacedBy": [],
-			"replaces": [],
+            "replaces": [],
             "lpib_vakkern_id": [],
-			"niveau_id": [],
+            "niveau_id": [],
             "doelniveau_id": [],
             "deprecated": true
         }
@@ -307,8 +282,7 @@
             "title": "",
             "description": "",
             "replacedBy": [],
-		"replacedBy": [],
-			"replaces": [],
+            "replaces": [],
             "doelniveau_id": [],
             "ldk_vakkern_id": [],
             "lpib_vakleergebied_id": [],
@@ -322,8 +296,7 @@
             "title": "",
             "description": "",
             "replacedBy": [],
-		"replacedBy": [],
-			"replaces": [],
+            "replaces": [],
             "doelniveau_id": [],
             "ldk_vaksubkern_id": [],
             "lpib_vakkern_id": [],
@@ -644,22 +617,6 @@
             "deprecated": true
     	}
     ],
-    "examenprogramma_bg_profiel": [
-    	{
-            "id": "-41",
-            "unreleased": true,
-            "title": "",
-            "description": "",
-            "vakleergebied_id": [],
-			"examenprogramma_bg_kern_id": [],
-			"examenprogramma_bg_module_id": [],
-			"examenprogramma_bg_keuzevak_id": [],
-			"niveau_id": [],
-            "replacedBy": [],
-			"replaces": [],
-            "deprecated": true
-    	}
-     ],
     "erk_gebied": [
     	{
             "id": "-42",
@@ -866,6 +823,7 @@
     "examenprogramma_bg_profiel": [
     	{
             "id": "-57",
+            "vakleergebied_id": [],
             "unreleased": true,
             "title": "",
             "description": "",
@@ -961,9 +919,9 @@
             "prefix": "",
             "title": "",
             "description": "",
-			"niveau_id": [],
+            "niveau_id": [],
             "replacedBy": [],
-			"replaces": [],
+            "replaces": [],
             "deprecated": true
     	}
      ],
@@ -991,6 +949,17 @@
             "lpib_vakleergebied_id": [],
             "doelniveau_id": [],
             "deprecated": true
+        }
+    ],
+    "tag": [
+        {
+            "id": "-76",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "replacedBy": [],
+            "deprecated": true            
         }
     ]
 }
