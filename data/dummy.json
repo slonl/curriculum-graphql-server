@@ -286,7 +286,27 @@
             "title": "",
             "description": "",
             "replaces": [],
+            "doelniveau_id": [],
+            "inh_subcluster_id":[]
+        }
+    ],
+    "inh_subcluster": [
+        {
+            "id": "-24",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
             "doelniveau_id": []
         }
-    ]
+    ],
+    "alias": [
+    	{
+	    "doel_id": "",
+	    "title": "",
+	    "description": "",
+	    "parent_id": ""
+    	}
+    ]    
 }
