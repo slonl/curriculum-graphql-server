@@ -1,5 +1,5 @@
 {
-    "vakleergebied": [
+	"vakleergebied": [
         {
             "id": "-1",
             "unreleased": true,
@@ -194,17 +194,17 @@
             "title": "",
             "description": "",
             "replaces": [],
-                        "lpib_vakkern_id": [],
-            "replaces": [],
+            "lpib_vakkern_id": [],
+			"niveau_id": [],
             "doelniveau_id": []
         }
-    ],
+    ],    
     "ldk_vakbegrip": [
-        {
-                "id": "-16",
-                "title": "",
-                "description":""
-        }
+	{
+		"id": "-16",
+		"title": "",
+		"description":""
+	}
     ],
     "ldk_vakleergebied": [
         {
@@ -285,8 +285,395 @@
             "prefix": "",
             "title": "",
             "description": "",
+            "inh_subcluster_id": [],
             "replaces": [],
             "doelniveau_id": []
         }
-    ]
+    ],
+    "inh_subcluster": [
+        {
+            "id": "-24",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "doelniveau_id": []
+        }
+    ],
+    "alias": [
+    	{
+	    "doel_id": "",
+	    "title": "",
+	    "description": "",
+	    "parent_id": ""
+    	}
+    ],
+    "syllabus_specifieke_eindterm": [
+    	{
+            "id": "-26",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "niveau_id": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "examenprogramma_eindterm_id": []            
+    	}
+    ],
+    "syllabus_vakbegrip": [
+    	{
+            "id": "-27",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "examenprogramma_eindterm_id": []            
+    	}
+    ],
+    "syllabus_toelichting": [
+    	{
+            "id": "-28",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "examenprogramma_eindterm_id": [],
+            "examenprogramma_domein_id": [],
+            "syllabus_specifieke_eindterm_id": []
+    	}
+    ],
+    "syllabus": [
+    	{
+            "id": "-29",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "examenprogramma_id": [],
+			"niveau_id": [],
+            "syllabus_toelichting_id": [],
+            "syllabus_specifieke_eindterm_id": [],
+            "syllabus_vakbegrip_id": [],
+            "syllabus_vakleergebied_id": []
+    	}
+    ],
+    "kerndoel_vakleergebied": [
+       {
+            "id": "-30",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "kerndoel_id": [],
+            "kerndoel_domein_id": [],
+            "kerndoel_uitstroomprofiel_id": [],
+			"niveau_id": [],
+            "vakleergebied_id": []
+        }
+    ],
+    "kerndoel_domein": [
+        {
+            "id": "-31",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "kerndoel_id": []    
+        }
+    ],
+    "kerndoel_uitstroomprofiel": [
+        {
+            "id": "-32",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "tag_id": [],
+            "kerndoel_id": []
+        }
+    ],
+    "ref_vakleergebied": [
+        {
+            "id": "-33",
+            "prefix": "",
+            "vakleergebied_id": [],
+            "doelniveau_id": [],
+            "ref_domein_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+			"niveau_id": [],
+            "unreleased": true
+        }
+    ],
+    "ref_domein": [
+        {
+            "id": "-34",
+            "prefix": "",
+            "doelniveau_id": [],
+            "ref_subdomein_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_subdomein": [
+        {
+            "id": "-35",
+            "prefix": "",
+            "doelniveau_id": [],
+            "ref_onderwerp_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_onderwerp": [
+        {
+            "id": "-36",
+            "prefix": "",
+            "doelniveau_id": [],
+            "ref_deelonderwerp_id": [],
+            "ref_tekstkenmerk_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],
+    "ref_deelonderwerp": [
+        {
+            "id": "-37",
+            "prefix": "",
+            "doelniveau_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+    ],    
+    "ref_tekstkenmerk": [
+        {
+            "id": "-38",
+            "prefix": "",
+            "doelniveau_id": [],
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "unreleased": true
+        }
+     ],
+    "syllabus_vakleergebied": [
+    	{
+            "id": "-39",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "vakleergebied_id": [],
+            "replaces": []
+    	}
+     ],
+    "erk_vakleergebied": [
+    	{
+            "id": "-40",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "vakleergebied_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "examenprogramma_bg_profiel": [
+    	{
+            "id": "-41",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "vakleergebied_id": [],
+			"examenprogramma_bg_kern_id": [],
+			"examenprogramma_bg_module_id": [],
+			"examenprogramma_bg_keuzevak_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "erk_gebied": [
+    	{
+            "id": "-42",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "erk_categorie_id": [],
+            "erk_taalactiviteit_id": [],
+            "erk_schaal_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "erk_categorie": [
+    	{
+            "id": "-43",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "erk_taalactiviteit_id": [],
+            "erk_schaal_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "erk_taalactiviteit": [
+    	{
+            "id": "-44",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "erk_schaal_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "erk_schaal": [
+    	{
+            "id": "-45",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "erk_candobeschrijving_id": [],
+            "erk_voorbeeld_id": [],
+            "erk_lesidee_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "erk_candobeschrijving": [
+    	{
+            "id": "-46",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "erk_voorbeeld": [
+    	{
+            "id": "-47",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "erk_lesidee": [
+    	{
+            "id": "-48",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "nh_categorie": [
+    	{
+            "id": "-49",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"nh_sector_id": [],
+			"nh_niveau_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "nh_sector": [
+    	{
+            "id": "-50",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"nh_schoolsoort_id": [],
+			"nh_bouw_id": [],
+			"nh_niveau_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "nh_schoolsoort": [
+    	{
+            "id": "-51",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"nh_leerweg_id": [],
+			"nh_bouw_id": [],
+			"nh_niveau_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "nh_leerweg": [
+    	{
+            "id": "-52",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"nh_bouw_id": [],
+			"nh_niveau_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "nh_bouw": [
+    	{
+            "id": "-53",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"nh_niveau_id": [],
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ],
+    "nh_niveau": [
+    	{
+            "id": "-54",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"niveau_id": [],
+            "replaces": []
+    	}
+     ]
 }

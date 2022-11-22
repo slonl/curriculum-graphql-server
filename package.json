@@ -1,0 +1,9 @@
+{
+	"name": "curriculum-graphql-server",
+	"url": "https://opendata.slo.nl/curriculum/",
+	"license": "MIT",
+	"scripts": {
+		"start": "node json-graphql-server/bin/json-graphql-server.js data/combined.json",
+		"combine": "cd data && node combine.js"
+	}
+}

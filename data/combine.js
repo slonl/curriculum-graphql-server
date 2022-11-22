@@ -9,7 +9,10 @@
 	var doelgroeptekstenSchema  = curriculum.loadSchema('./curriculum-doelgroepteksten/context.json', './curriculum-doelgroepteksten/');
 	var syllabusSchema          = curriculum.loadSchema('./curriculum-syllabus/context.json', './curriculum-syllabus/');
 	var inhoudslijnenSchema     = curriculum.loadSchema('./curriculum-inhoudslijnen/context.json', './curriculum-inhoudslijnen/');
-		
+	var referentiekaderSchema   = curriculum.loadSchema('./curriculum-referentiekader/context.json', './curriculum-referentiekader/');
+	var erkSchema               = curriculum.loadSchema('./curriculum-erk/context.json', './curriculum-erk/');
+	var niveauhierarchieSchema  = curriculum.loadSchema('./curriculum-niveauhierarchie/context.json', './curriculum-niveauhierarchie/');
+	
 	//FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
 	curriculum.data.parent = [{id:null}];
 
@@ -25,18 +28,31 @@
 			'ldk_vakleergebied','ldk_vakkern','ldk_vaksubkern','ldk_vakinhoud',
 			// Inhouden
 			'lpib_vakleergebied', 'lpib_vakkern','lpib_vaksubkern','lpib_vakinhoud',
+			// leerplan in beeld
+			'lpib_vakkencluster','lpib_leerlijn',
+			// syllabus
+			'syllabus_vakleergebied', 'syllabus', 'syllabus_specifieke_eindterm', 'syllabus_toelichting', 'syllabus_vakbegrip',
+			// inhoudslijnen
+			'inh_vakleergebied', 'inh_cluster', 'inh_inhoudslijn',
+			// referentiekader
+			'ref_vakleergebied', 'ref_domein', 'ref_subdomein', 'ref_onderwerp', 'ref_deelonderwerp', 'ref_tekstkenmerk',
+			// ERK
+			'erk_vakleergebied','erk_gebied','erk_categorie','erk_taalactiviteit','erk_schaal',
+			'erk_candobeschrijving','erk_voorbeeld','erk_lesidee',
 			// Doelen
-			'doelniveau','doel','niveau','vakleergebied',
+			'doelniveau','doel','niveau','vakleergebied', 'alias', 'tag',
 			// Kerndoelen
-			'kerndoel','kerndoel_domein','kerndoel_vakleergebied','kerndoel_uitstroomprofiel',
+			'kerndoel_vakleergebied','kerndoel_domein','kerndoel_uitstroomprofiel','kerndoel',
 			// Examenprogramma
-			'examenprogramma','examenprogramma_vakleergebied','examenprogramma_domein','examenprogramma_subdomein','examenprogramma_eindterm',
-			'examenprogramma_kop1','examenprogramma_kop2','examenprogramma_kop3','examenprogramma_kop4','examenprogramma_body',
+			'examenprogramma_vakleergebied', 'examenprogramma','examenprogramma_domein',
+			'examenprogramma_subdomein','examenprogramma_eindterm','examenprogramma_kop1',
+			'examenprogramma_kop2','examenprogramma_kop3','examenprogramma_kop4','examenprogramma_body',
 			// Examenprogramma beroepsgericht
-
-			'examenprogramma_bg','examenprogramma_bg_profiel','examenprogramma_bg_kern','examenprogramma_bg_kerndeel','examenprogramma_bg_module',
-			'examenprogramma_bg_moduletaak','examenprogramma_bg_keuzevak','examenprogramma_bg_keuzevaktaak','examenprogramma_bg_deeltaak','examenprogramma_bg_globale_eindterm',
-
+			'examenprogramma_bg','examenprogramma_bg_profiel','examenprogramma_bg_kern','examenprogramma_bg_kerndeel',
+			'examenprogramma_bg_module','examenprogramma_bg_moduletaak','examenprogramma_bg_keuzevak',
+			'examenprogramma_bg_keuzevaktaak','examenprogramma_bg_deeltaak','examenprogramma_bg_globale_eindterm',
+			// Niveau hierarchie
+			'nh_categorie','nh_sector','nh_schoolsoort','nh_leerweg','nh_bouw','nh_niveau',
 			// Doelgroepteksten
 			'leerlingtekst',
 			// leerplan in beeld
@@ -58,7 +74,10 @@
 			'lpib_leerlijn': ['vakleergebied_id', 'lpib_vakinhoud_id'],
 			'lpib_vakkencluster': ['vakleergebied_id'],
 			'lpib_vakleergebied': ['vakleergebied_id'],
-			'inh_vakleergebied': ['vakleergebied_id']
+			'inh_vakleergebied': ['vakleergebied_id'],
+			'ref_vakleergebied': ['vakleergebied_id'],
+			'erk_vakleergebied': ['vakleergebied_id'],
+			'doelniveau': ['kerndoel_id','examenprogramma_eindterm_id','examenprogramma_subdomein_id','examenprogramma_domein_id','doel_id']
 		};
 		
 		function shouldIgnore(section, property) {
@@ -86,7 +105,6 @@
 
 			// for all sections, check if there is a reference to this entity's id
 			var parentTypes = types.slice();
-//			parentTypes.pop();//? popt niveau
 			parentTypes.forEach(function(section) {
 				// if entity.section is e.g. ldk_vak, and section is vak, this link should not be
 				// counted as a parent.
@@ -103,10 +121,8 @@
 								idIndex[childId].parents.push(id);
 							}
 						});
-					} else {
-						if (typeof idIndex[entity[section+'_id']] != 'undefined') {
-							idIndex[entity[section+'_id']].parents.push(id);
-						}
+					} else if (typeof idIndex[entity[section+'_id']] != 'undefined') {
+						idIndex[entity[section+'_id']].parents.push(id);
 					}
 				}
 			});
@@ -165,17 +181,42 @@
 					ldk_vakinhoud_id: [],
 					doel_id: [],
 					kerndoel_id: [],
+					kerndoel_vakleergebied_id: [],
+					kerndoel_domein_id: [],
+					kerndoel_uitstroomprofiel_id: [],
 					examenprogramma_eindterm_id: [],
 					examenprogramma_subdomein_id: [],
 					examenprogramma_domein_id: [],
 					examenprogramma_id: [],
+					examenprogramma_vakleergebied_id: [],
 					syllabus_specifieke_eindterm_id: [],
 					syllabus_toelichting_id: [],
 					syllabus_vakbegrip_id: [],
 					syllabus_id: [],
+					syllabus_vakleergebied_id: [],
 					inh_vakleergebied_id: [],
 					inh_inhoudslijn_id: [],
-					inh_cluster_id: []
+					inh_cluster_id: [],
+					ref_vakleergebied_id: [],
+					ref_domein_id: [],
+					ref_subdomein_id: [],
+					ref_onderwerp_id: [],
+					ref_deelonderwerp_id: [],
+					ref_tekstkenmerk_id: [],
+					erk_vakleergebied_id: [],
+					erk_gebied_id: [],
+					erk_categorie_id: [],
+					erk_taalactiviteit_id: [],
+					erk_schaal_id: [],
+					erk_candobeschrijving_id: [],
+					erk_voorbeeld_id: [],
+					erk_lesidee_id: [],
+					nh_categorie_id: [],
+					nh_sector_id: [],
+					nh_schoolsoort_id: [],
+					nh_leerweg_id: [],
+					nh_bouw_id: [],
+					nh_niveau_id: []
 				};
 				niveauIndex.push(niveauOb);
 			}
@@ -195,7 +236,7 @@
 					}
 					var niveau = getNiveauIndex(niveauId);
 					parents.forEach(function(parentId) {
-						console.log(indent+parentId);
+//						console.log(indent+parentId);
 						if (seen[niveauId][parentId]) {
 //							console.error('loop detected, skipping '+parentId);
 							return;
@@ -256,11 +297,21 @@
 							});
 						}
 					});
-				} else if (section == 'examenprogramma_eindterm') {
+				} else if (['examenprogramma_eindterm','kerndoel'].includes(section)) {
 					entity.niveau_id.forEach(function(niveauId) {
 						var index = getNiveauIndex(niveauId);
 						index[section+'_id'].push(entity.id);
 					});
+				} else if (['examenprogramma','syllabus'].includes(section)) {
+					// add a niveauIndex entry to the section_vakleergebied entities
+					entity.niveau_id.forEach(function(niveauId) {
+						var index = getNiveauIndex(niveauId);
+						if (Array.isArray(entity[section+'_vakleergebied_id'])) {
+							entity[section+'_vakleergebied_id'].forEach(function(vlgEntityId) {
+								index[section+'_vakleergebied_id'].push(vlgEntityId);
+							});
+						}
+					})
 				} else {
 					console.log('unknown section',section);
 				}
@@ -271,6 +322,18 @@
 		curriculum.data.doelniveau.forEach(function(entity) {
 			addEntityWithNiveau(entity, 'doelniveau');
 		});
+		curriculum.data.kerndoel.forEach(function(entity) {
+			addEntityWithNiveau(entity, 'kerndoel');
+		});
+		curriculum.data.syllabus_specifieke_eindterm.forEach(function(entity) {
+			addEntityWithNiveau(entity, 'syllabus_specifieke_eindterm');
+		});
+		curriculum.data.examenprogramma.forEach(function(entity) {
+			addEntityWithNiveau(entity, 'examenprogramma');
+		});
+		curriculum.data.syllabus.forEach(function(entity) {
+			addEntityWithNiveau(entity, 'syllabus');
+		});
 		var c = 0;
 		var total = curriculum.data.examenprogramma_eindterm.length;
 		curriculum.data.examenprogramma_eindterm.forEach(function(entity) {
@@ -278,7 +341,7 @@
 			process.stdout.write("\r"+c+'/'+total+' '+entity.id);
 			addEntityWithNiveau(entity, 'examenprogramma_eindterm');
 		});
-		
+
 /*
 		var seen = {};
 		function walkParents(entity, indent) {
@@ -289,13 +352,17 @@
 		}
 		walkParents(idIndex["60436a57-d4e3-4c40-9da0-5ed326b1c45e"]);
 */
-		console.log(count+' correct, '+error+' errors');
+		console.log("\n"+count+' correct, '+error+' errors');
 	}
 
 
 	var fs = require('fs');
 	var dummy = JSON.parse(fs.readFileSync('./dummy.json'));
 	Object.keys(dummy).forEach(function(section) {
+		console.log('appending dummy to '+section);
+		if (!curriculum.data[section]) {
+			curriculum.data[section] = [];
+		}
 		curriculum.data[section].push(dummy[section][0]);
 	});
 	
