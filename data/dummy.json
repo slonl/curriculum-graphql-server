@@ -992,5 +992,27 @@
             "doelniveau_id": [],
             "deprecated": true
         }
+    ],
+    "tag": [
+        {
+            "id": "-76",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "replacedBy": [],
+            "deprecated": true            
+        }
+    ],
+    "niveau": [
+        {
+            "id": "-77",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "replacedBy": [],
+            "deprecated": true            
+        }
     ]
 }
