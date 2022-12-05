@@ -1,9 +1,6 @@
 [submodule "data/curriculum-basis"]
 	path = data/curriculum-basis
 	url = https://github.com/slonl/curriculum-basis.git
-[submodule "data/curriculum-lpib"]
-	path = data/curriculum-lpib
-	url = https://github.com/slonl/curriculum-lpib.git
 [submodule "data/curriculum-kerndoelen"]
 	path = data/curriculum-kerndoelen
 	url = https://github.com/slonl/curriculum-kerndoelen.git
@@ -13,18 +10,27 @@
 [submodule "data/curriculum-examenprogramma"]
 	path = data/curriculum-examenprogramma
 	url = https://github.com/slonl/curriculum-examenprogramma/
-[submodule "data/curriculum-leerplaninbeeld"]
-	path = data/curriculum-leerplaninbeeld
-	url = https://github.com/slonl/curriculum-leerplaninbeeld
 [submodule "data/curriculum-syllabus"]
 	path = data/curriculum-syllabus
 	url = https://github.com/slonl/curriculum-syllabus.git
 [submodule "data/curriculum-examenprogramma-bg"]
 	path = data/curriculum-examenprogramma-bg
 	url = https://github.com/slonl/curriculum-examenprogramma-bg
-[submodule "data/curriculum-doelgroepteksten"]
-	path = data/curriculum-doelgroepteksten
-	url = https://github.com/slonl/curriculum-doelgroepteksten.git
 [submodule "data/curriculum-inhoudslijnen"]
 	path = data/curriculum-inhoudslijnen
 	url = https://github.com/slonl/curriculum-inhoudslijnen
+[submodule "data/curriculum-doelgroepteksten"]
+	path = data/curriculum-doelgroepteksten
+	url = https://github.com/slonl/curriculum-doelgroepteksten
+[submodule "data/curriculum-referentiekader"]
+	path = data/curriculum-referentiekader
+	url = https://github.com/slonl/curriculum-referentiekader
+[submodule "data/curriculum-erk"]
+	path = data/curriculum-erk
+	url = https://github.com/slonl/curriculum-erk
+[submodule "data/curriculum-niveauhierarchie"]
+	path = data/curriculum-niveauhierarchie
+	url = https://github.com/slonl/curriculum-niveauhierarchie
+[submodule "data/curriculum-lpib"]
+	path = data/curriculum-lpib
+	url = https://github.com/slonl/curriculum-lpib
