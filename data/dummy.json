@@ -972,5 +972,60 @@
             "replacedBy": [],
             "deprecated": true            
         }
+    ],
+    "fo_domein": [
+        {
+            "id": "-78",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "replacedBy": [],
+            "deprecated": true            
+        }
+    ],
+    "fo_subdomein": [
+        {
+            "id": "-79",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "replacedBy": [],
+            "deprecated": true            
+        }
+    ],
+    "fo_doelzin": [
+        {
+            "id": "-80",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "replacedBy": [],
+            "deprecated": true            
+        }
+    ],
+    "fo_toelichting": [
+        {
+            "id": "-81",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "replacedBy": [],
+            "deprecated": true            
+        }
+    ],
+    "fo_uitwerking": [
+        {
+            "id": "-82",
+            "unreleased": true,
+            "title": "",
+            "description": "",
+            "replaces": [],
+            "replacedBy": [],
+            "deprecated": true            
+        }
     ]
 }

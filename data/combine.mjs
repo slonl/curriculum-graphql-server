@@ -15,7 +15,8 @@ let allSchemas = [
 	curriculum.loadContextFromFile('curriculum-inhoudslijnen', './curriculum-inhoudslijnen/context.json'),
 	curriculum.loadContextFromFile('curriculum-referentiekader', './curriculum-referentiekader/context.json'),
 	curriculum.loadContextFromFile('curriculum-erk', './curriculum-erk/context.json'),
-	curriculum.loadContextFromFile('curriculum-niveauhierarchie', './curriculum-niveauhierarchie/context.json')
+	curriculum.loadContextFromFile('curriculum-niveauhierarchie', './curriculum-niveauhierarchie/context.json'),
+	curriculum.loadContextFromFile('curriculum-fo', './curriculum-fo/context.json')
 ]
 
 //FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
@@ -115,7 +116,8 @@ function makeNiveauIndex() {
 				nh_schoolsoort_id: [],
 				nh_leerweg_id: [],
 				nh_bouw_id: [],
-				nh_niveau_id: []
+				nh_niveau_id: [],
+				fo_doelzin_id: []
 			};
 			niveauIndex.push(niveauOb);
 		}
