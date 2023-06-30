@@ -16,7 +16,8 @@ let allSchemas = [
 	curriculum.loadContextFromFile('curriculum-referentiekader', './curriculum-referentiekader/context.json'),
 	curriculum.loadContextFromFile('curriculum-erk', './curriculum-erk/context.json'),
 	curriculum.loadContextFromFile('curriculum-niveauhierarchie', './curriculum-niveauhierarchie/context.json'),
-	curriculum.loadContextFromFile('curriculum-fo', './curriculum-fo/context.json')
+	curriculum.loadContextFromFile('curriculum-fo', './curriculum-fo/context.json'),
+	curriculum.loadContextFromFile('curriculum-samenhang', './curriculum-samenhang/context.json')
 ]
 
 //FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
