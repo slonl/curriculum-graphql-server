@@ -37,3 +37,9 @@
 [submodule "data/curriculum-fo"]
 	path = data/curriculum-fo
 	url = https://github.com/slonl/curriculum-fo.git
+[submodule "data/samenhang"]
+	path = data/samenhang
+	url = https://github.com/slonl/curriculum-samenhang.git
+[submodule "data/curriculum-samenhang"]
+	path = data/curriculum-samenhang
+	url = https://github.com/slonl/curriculum-samenhang.git
