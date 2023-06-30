@@ -4,20 +4,20 @@ import fs from 'fs'
 const curriculum = new Curriculum()
 
 let allSchemas = [
-	curriculum.loadContextFromFile('curriculum-basis', './curriculum-basis/context.json'),
-	curriculum.loadContextFromFile('curriculum-kerndoelen', './curriculum-kerndoelen/context.json'),
-	curriculum.loadContextFromFile('curriculum-leerdoelenkaarten', './curriculum-leerdoelenkaarten/context.json'),
-	curriculum.loadContextFromFile('curriculum-lpib', './curriculum-lpib/context.json'),
-	curriculum.loadContextFromFile('curriculum-examenprogramma', './curriculum-examenprogramma/context.json'),
+	curriculum.loadContextFromFile('curriculum-basis', 				'./curriculum-basis/context.json'),
+	curriculum.loadContextFromFile('curriculum-fo', 				'./curriculum-fo/context.json'),
+	curriculum.loadContextFromFile('curriculum-samenhang', 			'./curriculum-samenhang/context.json'),
+	curriculum.loadContextFromFile('curriculum-kerndoelen', 		'./curriculum-kerndoelen/context.json'),
+	curriculum.loadContextFromFile('curriculum-leerdoelenkaarten', 	'./curriculum-leerdoelenkaarten/context.json'),
+	curriculum.loadContextFromFile('curriculum-lpib', 				'./curriculum-lpib/context.json'),
+	curriculum.loadContextFromFile('curriculum-examenprogramma', 	'./curriculum-examenprogramma/context.json'),
 	curriculum.loadContextFromFile('curriculum-examenprogramma-bg', './curriculum-examenprogramma-bg/context.json'),
-	curriculum.loadContextFromFile('curriculum-doelgroepteksten', './curriculum-doelgroepteksten/context.json'),
-	curriculum.loadContextFromFile('curriculum-syllabus', './curriculum-syllabus/context.json'),
-	curriculum.loadContextFromFile('curriculum-inhoudslijnen', './curriculum-inhoudslijnen/context.json'),
-	curriculum.loadContextFromFile('curriculum-referentiekader', './curriculum-referentiekader/context.json'),
-	curriculum.loadContextFromFile('curriculum-erk', './curriculum-erk/context.json'),
-	curriculum.loadContextFromFile('curriculum-niveauhierarchie', './curriculum-niveauhierarchie/context.json'),
-	curriculum.loadContextFromFile('curriculum-fo', './curriculum-fo/context.json'),
-	curriculum.loadContextFromFile('curriculum-samenhang', './curriculum-samenhang/context.json')
+	curriculum.loadContextFromFile('curriculum-doelgroepteksten', 	'./curriculum-doelgroepteksten/context.json'),
+	curriculum.loadContextFromFile('curriculum-syllabus', 			'./curriculum-syllabus/context.json'),
+	curriculum.loadContextFromFile('curriculum-inhoudslijnen', 		'./curriculum-inhoudslijnen/context.json'),
+	curriculum.loadContextFromFile('curriculum-referentiekader', 	'./curriculum-referentiekader/context.json'),
+	curriculum.loadContextFromFile('curriculum-erk', 				'./curriculum-erk/context.json'),
+	curriculum.loadContextFromFile('curriculum-niveauhierarchie', 	'./curriculum-niveauhierarchie/context.json')
 ]
 
 //FIXME: alias has 'parent_id', so data.parent is needed for json-graphql-server
@@ -118,7 +118,8 @@ function makeNiveauIndex() {
 				nh_leerweg_id: [],
 				nh_bouw_id: [],
 				nh_niveau_id: [],
-				fo_doelzin_id: []
+				fo_doelzin_id: [],
+				tag_id: []
 			};
 			niveauIndex.push(niveauOb);
 		}
