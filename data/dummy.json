@@ -1044,5 +1044,32 @@
             "fo_uitwerking_id": [],
             "deprecated": true            
         }
-    ]
+    ],
+    "erk_taalprofiel": [
+        {
+            "id": "-84",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+			"erk_taalprofieltekst_id": "",
+			"erk_schaal_id": "",
+            "replacedBy": [],
+            "replaces": [],
+            "deprecated": true
+        }
+    ],
+    "erk_taalprofieltekst": [
+        {
+            "id": "-85",
+            "unreleased": true,
+            "prefix": "",
+            "title": "",
+            "description": "",
+            "niveau_id": [],
+           "replacedBy": [],
+            "replaces": [],
+            "deprecated": true
+        }
+   ]
 }

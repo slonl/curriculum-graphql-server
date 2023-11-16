@@ -105,6 +105,8 @@ function makeNiveauIndex() {
 				ref_deelonderwerp_id: [],
 				ref_tekstkenmerk_id: [],
 				erk_vakleergebied_id: [],
+				erk_taalprofiel_id: [],
+				erk_taalprofieltekst_id: [],
 				erk_gebied_id: [],
 				erk_categorie_id: [],
 				erk_taalactiviteit_id: [],
