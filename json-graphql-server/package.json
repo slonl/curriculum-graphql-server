@@ -57,7 +57,7 @@
         "apollo-client": "~1.2.0",
         "apollo-test-utils": "~0.3.2",
         "cors": "^2.8.5",
-        "express": "^4.16.4",
+        "express": "^4.17.3",
         "express-graphql": "^0.6.12",
         "graphql": "~0.10.5",
         "graphql-tag": "~2.0.0",
