@@ -114,13 +114,12 @@ function makeNiveauIndex() {
 				erk_candobeschrijving_id: [],
 				erk_voorbeeld_id: [],
 				erk_lesidee_id: [],
-				nh_categorie_id: [],
-				nh_sector_id: [],
-				nh_schoolsoort_id: [],
-				nh_leerweg_id: [],
-				nh_bouw_id: [],
-				nh_niveau_id: [],
+				fo_set_id: [],
+				fo_domein_id: [],
+				fo_subdomein_id: [],
 				fo_doelzin_id: [],
+				fo_uitwerking_id: [],
+				fo_toelichting_id: [],
 				tag_id: []
 			};
 			niveauIndex.push(niveauOb);
@@ -233,11 +232,16 @@ function makeNiveauIndex() {
 						});
 					}
 				});
-			} else if (['examenprogramma_eindterm','kerndoel'].includes(section)) {
-				entity.niveau_id.forEach(function(niveauId) {
-					var index = getNiveauIndex(niveauId);
-					index[section+'_id'].push(entity.id);
-				});
+			} else if (['examenprogramma_eindterm','kerndoel','fo_uitwerking','fo_toelichting'].includes(section)) {
+				if(Array.isArray(entity.niveau_id)) {
+					entity.niveau_id.forEach(function(niveauId) {
+						var index = getNiveauIndex(niveauId);
+						index[section+'_id'].push(entity.id);
+					});
+				} else {
+					console.log(`niveau_id is not an array for entity ${entity.id}`);
+					// Handle the case where niveau_id is not as expected
+				}
 			} else if (['examenprogramma','syllabus'].includes(section)) {
 				// add a niveauIndex entry to the section_vakleergebied entities
 				entity.niveau_id.forEach(function(niveauId) {
@@ -265,6 +269,12 @@ function makeNiveauIndex() {
 	});
 	curriculum.data.examenprogramma.forEach(function(entity) {
 		addEntityWithNiveau(entity, 'examenprogramma');
+	});
+	curriculum.data.fo_uitwerking.forEach(function(entity) {
+		addEntityWithNiveau(entity, 'fo_uitwerking');
+	});
+	curriculum.data.fo_toelichting.forEach(function(entity) {
+		addEntityWithNiveau(entity, 'fo_toelichting');
 	});
 	curriculum.data.syllabus.forEach(function(entity) {
 		let ex = entity.examenprogramma_id
@@ -402,3 +412,6 @@ Promise.allSettled(allSchemas)
 	var fileData = JSON.stringify(combined.data, null, "\t");
 	fs.writeFileSync('./combined.json', fileData);
 })
+.catch(error => {
+    console.error('Error in final processing:', error);
+});
