@@ -1,3 +1,6 @@
+# Archived!
+This repository is no longer in use. The opendata.slo.nl system now uses the [slonl/curriculum-store](https:/github.com/slonl/curriculum-store), based on [SimplyStore](https://github.com/SimplyEdit/SimplyStore.git), as a backend.
+
 # curriculum-graphql-server
 GraphQL server for curriculum data. This server uses the curriculum-basis and curriculum-lpib github repositories as submodules.
 
